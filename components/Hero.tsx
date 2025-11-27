@@ -1,0 +1,71 @@
+import React from 'react';
+import { ArrowRight, Hexagon } from 'lucide-react';
+
+interface HeroProps {
+  id: string;
+}
+
+export const Hero: React.FC<HeroProps> = ({ id }) => {
+  return (
+    <section id={id} className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden bg-zinc-100">
+      {/* Background with darker overlay for better contrast */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="https://picsum.photos/1920/1080?grayscale&blur=2" 
+          alt="Architecture Background" 
+          className="w-full h-full object-cover opacity-40 grayscale contrast-125"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-zinc-100/90 via-zinc-100/40 to-transparent" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full pt-20">
+        <div className="max-w-4xl animate-fade-in-up">
+          <div className="flex items-center gap-3 mb-6">
+            <Hexagon size={16} className="text-zinc-900 fill-zinc-900" />
+            <span className="text-xs font-bold tracking-[0.25em] uppercase text-zinc-900">Soluciones de Ingeniería y Gestión</span>
+          </div>
+          
+          <h1 className="text-5xl md:text-7xl font-display font-bold text-zinc-900 leading-[1.1] mb-8">
+            Infraestructura Inteligente <br/>
+            <span className="text-zinc-500 italic font-serif">para la Industria Minera.</span>
+          </h1>
+          
+          <p className="text-lg md:text-xl text-zinc-700 leading-relaxed mb-10 max-w-2xl border-l-2 border-zinc-900 pl-6">
+            Integramos arquitectura, ingeniería y cumplimiento normativo en 6 nodos de conocimiento especializados. 
+            Garantizamos la continuidad operacional mediante soluciones técnicas de vanguardia.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4">
+            <a 
+              href="#services" 
+              className="bg-zinc-900 text-white px-8 py-4 flex items-center justify-center gap-3 text-sm uppercase tracking-widest font-medium hover:bg-zinc-700 transition-all hover:gap-4"
+            >
+              Explorar Soluciones <ArrowRight size={16} />
+            </a>
+            <a 
+              href="#contact" 
+              className="border border-zinc-900 text-zinc-900 px-8 py-4 flex items-center justify-center gap-3 text-sm uppercase tracking-widest font-medium hover:bg-zinc-900 hover:text-white transition-colors"
+            >
+              Agendar Reunión Técnica
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Tech decoration elements */}
+      <div className="absolute bottom-0 right-0 p-12 hidden lg:block opacity-50">
+        <div className="flex gap-8">
+           <div className="text-right">
+             <span className="block text-3xl font-bold text-zinc-900">15+</span>
+             <span className="text-xs uppercase tracking-widest text-zinc-600">Años Exp.</span>
+           </div>
+           <div className="w-[1px] h-12 bg-zinc-400"></div>
+           <div className="text-right">
+             <span className="block text-3xl font-bold text-zinc-900">45k</span>
+             <span className="text-xs uppercase tracking-widest text-zinc-600">m² Gestionados</span>
+           </div>
+        </div>
+      </div>
+    </section>
+  );
+};
