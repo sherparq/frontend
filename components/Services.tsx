@@ -1,12 +1,12 @@
 import React from 'react';
-import { 
-  FileCheck2, 
-  Ruler, 
-  Box, 
-  Users2, 
-  MonitorPlay, 
-  ShieldAlert, 
-  Plus 
+import {
+  FileCheck2,
+  Ruler,
+  Box,
+  Users2,
+  MonitorPlay,
+  ShieldAlert,
+  Plus
 } from 'lucide-react';
 
 interface ServicesProps {
@@ -18,55 +18,55 @@ const nodes = [
   {
     id: 1,
     icon: <FileCheck2 size={32} strokeWidth={1.5} />,
-    title: "Gestión Regulatoria y Permisología",
+    title: "Gestión Regulatoria y Permisología Acelerada",
     subtitle: "DOM & SEREMI",
-    desc: "Gestión integral en el marco normativo de Antofagasta. Tramitación de recepciones definitivas, regularizaciones y validación legal de infraestructuras críticas.",
-    value: "Mitigación del riesgo de permisología mediante gestión de doble vía (DOM/SEREMI/Sernageomin).",
+    desc: "Eliminamos la incertidumbre de la tramitación en Antofagasta. Hemos liderado la Recepción Definitiva de Obras y la regularización de instalaciones industriales, gestionando con éxito más de $45.000 m² en permisos ante la DOM de Antofagasta.",
+    value: "Especialistas en Ordenanzas Municipales Seccionales (ej. Sector La Negra) y armonización urbanística/sanitaria/minera.",
     highlight: false
   },
   {
     id: 2,
     icon: <Ruler size={32} strokeWidth={1.5} />,
-    title: "Ingeniería Arquitectónica",
-    subtitle: "Diseño Civil Estructural",
-    desc: "Diseño de infraestructura de soporte operativo (Cabinas, Salas de Cambio, Comedores) integrando estabilidad estructural y funcionalidad minera.",
-    value: "Diseño alineado con los estándares de seguridad operacional más rigurosos (ej. Minera Escondida).",
+    title: "Diseño Civil Estructural de Alta Exigencia (HSE)",
+    subtitle: "Seguridad Física",
+    desc: "Desarrollamos infraestructura que soporta las condiciones extremas de la faena minera. Diseño de cabinas de seguridad (ej. Cabinas de Control Stockpile OGP1), optimización de edificios de servicio y urbanización de patios.",
+    value: "Priorizamos la seguridad física de activos y personas en cada diseño.",
     highlight: true
   },
   {
     id: 3,
     icon: <Box size={32} strokeWidth={1.5} />,
-    title: "Geomática y Modelado 3D",
-    subtitle: "Levantamientos de Alta Precisión",
-    desc: "Captura de datos espaciales, ortofotografías y modelos 3D de alta fidelidad para superficies extensas (+400 Ha) y planificación precisa.",
-    value: "Base cartográfica confiable para ingeniería de detalle y cumplimiento Sernageomin (KMZ/UTM).",
+    title: "Geomática y Modelado 3D de Faenas",
+    subtitle: "Base Cartográfica",
+    desc: "Proporcionamos la base cartográfica georreferenciada indispensable para la aprobación de Sernageomin. Levantamientos topográficos y ortofotografías con modelo 3D de alta fidelidad (hasta 400 hectáreas).",
+    value: "Datos precisos para el cumplimiento normativo y la planificación estratégica.",
     highlight: false
   },
   {
     id: 4,
     icon: <Users2 size={32} strokeWidth={1.5} />,
-    title: "Optimización Logística",
-    subtitle: "Estudios de Carga y Flujos",
-    desc: "Análisis de relaciones de desplazamiento, redistribución de personal y mapas de flujo para maximizar eficiencia en faena.",
-    value: "Reducción de tiempos muertos y minimización de riesgos por exposición climática.",
+    title: "Optimización de Flujos Operacionales y Logística",
+    subtitle: "Eficiencia y Bienestar",
+    desc: "Maximizamos la eficiencia y el bienestar del personal. Estudios de Carga de Ocupación y Flujos para redistribución estratégica. Diseño de soluciones para mitigar riesgos logísticos y climáticos (ej. Control Temperatura Rodoviarios).",
+    value: "Optimización del recorrido desde el bus hasta el punto de trabajo.",
     highlight: false
   },
   {
     id: 5,
     icon: <MonitorPlay size={32} strokeWidth={1.5} />,
-    title: "Visualización Técnica",
-    subtitle: "Animación 3D para Mantenimiento",
-    desc: "Transformación de ingeniería conceptual en procedimientos visuales explícitos para armado y desarme de componentes críticos.",
-    value: "Capacitación visual para tareas de alto riesgo con máxima precisión y mínimo error.",
+    title: "Ingeniería de Mantenimiento y Procedimientos Visuales (3D)",
+    subtitle: "Capacitación Visual",
+    desc: "Aseguramos la ejecución segura de procedimientos complejos. Videos de Animación 3D para ilustrar armado, desarme y desmontaje de componentes críticos (ej. Filtros PF-01, Bombas Verticales).",
+    value: "Esencial para la capacitación y planificación de tareas de alto riesgo.",
     highlight: false
   },
   {
     id: 6,
     icon: <ShieldAlert size={32} strokeWidth={1.5} />,
-    title: "Infraestructura Crítica y HSE",
-    subtitle: "Seguridad y Medio Ambiente",
-    desc: "Diseño de sistemas operativos (Patios de Residuos, Layouts de Seguridad) bajo estricta concurrencia normativa y estándares corporativos.",
-    value: "Principio de Mayor Exigencia para garantizar estabilidad y aprobación de proyectos.",
+    title: "Compliance de Sustancias Peligrosas (D.S. N° 43) y Residuos",
+    subtitle: "Seguridad Normativa",
+    desc: "Garantizamos cumplimiento MINSAL. Diseño y regularización de Bodegas SUSPEL, priorizando distanciamientos críticos. Diseños para gestión de residuos enajenables alineados con requisitos HSE.",
+    value: "Cumplimiento estricto de normativas de seguridad y medio ambiente.",
     highlight: true
   }
 ];
@@ -75,13 +75,13 @@ export const Services: React.FC<ServicesProps> = ({ id }) => {
   return (
     <section id={id} className="py-24 bg-white relative">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        
+
         {/* Section Header */}
         <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-zinc-100 pb-8">
           <div className="max-w-3xl">
             <span className="text-xs font-bold tracking-[0.2em] uppercase text-zinc-500 mb-2 block">Nuestra Oferta de Valor</span>
             <h2 className="text-4xl md:text-5xl font-display font-bold text-zinc-900 leading-tight">
-              Cluster de Nodos <br/> de Conocimiento
+              Cluster de Nodos <br /> de Conocimiento
             </h2>
           </div>
           <p className="text-zinc-600 max-w-sm text-sm leading-relaxed text-right md:text-left">
@@ -92,8 +92,8 @@ export const Services: React.FC<ServicesProps> = ({ id }) => {
         {/* Bento Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {nodes.map((node) => (
-            <div 
-              key={node.id} 
+            <div
+              key={node.id}
               className={`group relative overflow-hidden p-8 border transition-all duration-500 hover:shadow-2xl flex flex-col justify-between h-[400px]
                 ${node.highlight ? 'bg-zinc-900 border-zinc-900 text-white' : 'bg-zinc-50 border-zinc-200 text-zinc-900 hover:border-zinc-400'}
               `}

@@ -10,13 +10,13 @@ export const Contact: React.FC<ContactProps> = ({ id }) => {
     <section id={id} className="py-24 bg-zinc-900 text-white">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          
+
           {/* Contact Info */}
           <div>
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-8">Hablemos de su Proyecto</h2>
             <p className="text-zinc-400 mb-12 text-lg">
-              Estamos listos para abordar desafíos complejos en arquitectura e ingeniería. 
-              Contáctenos para coordinar una reunión técnica.
+              **No deje la continuidad de su proyecto al azar.**<br />
+              Contáctenos para una **Auditoría de Compliance Regulatorio en Antofagasta** y obtenga la ruta más segura hacia su aprobación.
             </p>
 
             <div className="space-y-8">
@@ -26,7 +26,7 @@ export const Contact: React.FC<ContactProps> = ({ id }) => {
                 </div>
                 <div>
                   <h4 className="text-lg font-bold mb-1">Ubicación</h4>
-                  <p className="text-zinc-400">Barrio Grecia,<br/>Antofagasta, Chile.</p>
+                  <p className="text-zinc-400">Barrio Grecia,<br />Antofagasta, Chile.</p>
                 </div>
               </div>
 
@@ -58,9 +58,9 @@ export const Contact: React.FC<ContactProps> = ({ id }) => {
 
           {/* Map Placeholder */}
           <div className="relative h-full min-h-[400px] bg-zinc-800 overflow-hidden border border-zinc-700 group">
-            <img 
-              src="https://picsum.photos/800/600?grayscale" 
-              alt="Mapa Antofagasta" 
+            <img
+              src="https://picsum.photos/800/600?grayscale"
+              alt="Mapa Antofagasta"
               className="w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-500"
             />
             <div className="absolute bottom-0 left-0 p-8 bg-gradient-to-t from-black/80 to-transparent w-full">
