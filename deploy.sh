@@ -18,7 +18,7 @@ fi
 echo "🔨 Generando build de producción..."
 npm run build
 
-# 3. Hacer commit de los cambios (incluyendo dist/)
+# 3. Hacer commit de los cambios (incluyendo docs/)
 COMMIT_MSG="${1:-Update: Integración con Cloudflare Worker}"
 echo "📝 Haciendo commit de cambios..."
 git add .

@@ -47,7 +47,8 @@ Esto genera la carpeta `dist/` con los archivos optimizados para producción.
 ### Configuración Actual
 - **Repositorio:** `sherparq/frontend`
 - **URL:** https://sherparq.github.io/frontend/
-- **Rama de despliegue:** `main` (GitHub Pages despliega desde `/dist` en la rama main)
+- **Rama de despliegue:** `main`
+- **Carpeta de despliegue:** `/docs` (Nueva configuración requerida)
 
 ### Opción 1: Script Automatizado (Recomendado)
 
@@ -56,14 +57,14 @@ Esto genera la carpeta `dist/` con los archivos optimizados para producción.
 ```
 
 El script hace:
-1. ✅ Build de producción (`npm run build`)
-2. ✅ Commit de cambios (incluyendo `dist/`)
+1. ✅ Build de producción a carpeta `docs/`
+2. ✅ Commit de cambios
 3. ✅ Push a `origin/main`
 
 ### Opción 2: Despliegue Manual
 
 ```bash
-# 1. Build
+# 1. Build (genera carpeta docs/)
 npm run build
 
 # 2. Commit y push
@@ -72,15 +73,17 @@ git commit -m "Update: descripción de cambios"
 git push origin main
 ```
 
-### Configuración de GitHub Pages
+### ⚠️ Configuración Requerida en GitHub Pages
 
-En el repositorio de GitHub:
+Para solucionar el error 404, debes cambiar la configuración en GitHub:
+
 1. Ve a **Settings** → **Pages**
 2. **Source:** Deploy from a branch
-3. **Branch:** `main` → carpeta `/dist`
-4. Guarda los cambios
+3. **Branch:** `main`
+4. **Folder:** Selecciona `/docs` (en lugar de `/root`)
+5. Guarda los cambios
 
-⏳ **Nota:** GitHub Pages tarda 1-2 minutos en actualizar después del push.
+⏳ **Nota:** GitHub Pages tarda 1-2 minutos en actualizar después del cambio.
 
 ---
 
