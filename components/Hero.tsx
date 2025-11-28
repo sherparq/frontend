@@ -1,21 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowRight, Hexagon } from 'lucide-react';
+import { heroImages } from '../data/heroImages';
 
 interface HeroProps {
   id: string;
 }
 
 export const Hero: React.FC<HeroProps> = ({ id }) => {
+  const [currentImage, setCurrentImage] = useState(heroImages[0]);
+
+  useEffect(() => {
+    // Select a random image on mount
+    const randomIndex = Math.floor(Math.random() * heroImages.length);
+    setCurrentImage(heroImages[randomIndex]);
+  }, []);
+
   return (
     <section id={id} className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden bg-zinc-100">
       {/* Background with darker overlay for better contrast */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://picsum.photos/1920/1080?grayscale&blur=2"
-          alt="Architecture Background"
-          className="w-full h-full object-cover opacity-40 grayscale contrast-125"
+          src={currentImage.url}
+          alt={currentImage.alt}
+          className="w-full h-full object-cover opacity-40 grayscale contrast-125 transition-opacity duration-1000"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-zinc-100/90 via-zinc-100/40 to-transparent" />
+
+        {/* Image Location/Title Badge */}
+        <div className="absolute bottom-8 right-8 hidden md:flex flex-col items-end z-20 opacity-60">
+          <span className="text-xs font-bold tracking-widest uppercase text-zinc-900">{currentImage.title}</span>
+          <span className="text-[10px] uppercase tracking-wider text-zinc-600">{currentImage.location}</span>
+        </div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full pt-20">

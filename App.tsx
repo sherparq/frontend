@@ -8,6 +8,10 @@ import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { ChatWidget } from './components/ChatWidget';
 
+import { Partners } from './components/Partners';
+import { Compliance } from './components/Compliance';
+import { SafetyStats } from './components/SafetyStats';
+
 const App: React.FC = () => {
   // Simple scroll spy state to highlight navbar items
   const [activeSection, setActiveSection] = useState('home');
@@ -39,7 +43,10 @@ const App: React.FC = () => {
       <Navbar activeSection={activeSection} />
       <main className="flex-grow">
         <Hero id="home" />
+        <Partners />
         <Services id="services" />
+        <Compliance />
+        <SafetyStats />
         <About id="about" />
         <Portfolio id="portfolio" />
         <Contact id="contact" />
