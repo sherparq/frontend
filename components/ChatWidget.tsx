@@ -50,7 +50,8 @@ export const ChatWidget: React.FC = () => {
 
     try {
       // Llamada real al Cloudflare Worker
-      const response = await fetch('https://sherparq-backend.abogado.workers.dev', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'https://sherparq-backend.abogado.workers.dev';
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userMessage: text })
@@ -119,8 +120,8 @@ export const ChatWidget: React.FC = () => {
               >
                 <div
                   className={`max-w-[80%] p-3 rounded-2xl text-sm leading-relaxed ${msg.role === 'user'
-                      ? 'bg-zinc-900 text-white rounded-tr-none'
-                      : 'bg-white border border-zinc-200 text-zinc-700 rounded-tl-none shadow-sm'
+                    ? 'bg-zinc-900 text-white rounded-tr-none'
+                    : 'bg-white border border-zinc-200 text-zinc-700 rounded-tl-none shadow-sm'
                     }`}
                 >
                   {msg.content}
