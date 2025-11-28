@@ -18,55 +18,55 @@ const nodes = [
   {
     id: 1,
     icon: <FileCheck2 size={32} strokeWidth={1.5} />,
-    title: "Gestión Regulatoria y Permisología Acelerada",
+    title: "Gestión Regulatoria y Permisología Industrial",
     subtitle: "DOM & SEREMI",
-    desc: "Eliminamos la incertidumbre de la tramitación en Antofagasta. Hemos liderado la Recepción Definitiva de Obras y la regularización de instalaciones industriales, gestionando con éxito más de $45.000 m² en permisos ante la DOM de Antofagasta.",
-    value: "Especialistas en Ordenanzas Municipales Seccionales (ej. Sector La Negra) y armonización urbanística/sanitaria/minera.",
+    desc: "Ofrecemos una gestión de permisos integral y especializada en el complejo marco normativo de Antofagasta. Tramitación de más de 45.000 m² ante la DOM para minería no metálica. Especialistas en Recepción Definitiva, regularización de instalaciones y cumplimiento de OGUC y normativas seccionales (ej. La Negra).",
+    value: "Mitigación del riesgo de permisología al abordar la doble vía de aprobación (DOM/SEREMI/Sernageomin).",
     highlight: false
   },
   {
     id: 2,
     icon: <Ruler size={32} strokeWidth={1.5} />,
-    title: "Diseño Civil Estructural de Alta Exigencia (HSE)",
-    subtitle: "Seguridad Física",
-    desc: "Desarrollamos infraestructura que soporta las condiciones extremas de la faena minera. Diseño de cabinas de seguridad (ej. Cabinas de Control Stockpile OGP1), optimización de edificios de servicio y urbanización de patios.",
-    value: "Priorizamos la seguridad física de activos y personas en cada diseño.",
+    title: "Ingeniería Arquitectónica y Diseño Civil Estructural",
+    subtitle: "Infraestructura Minera",
+    desc: "Desarrollamos proyectos de diseño arquitectónico industrial y civil-estructural para faenas mineras. Desde cabinas de seguridad (Stockpile) hasta edificios de servicio (comedores, salas de cambio), optimizando flujos y logística. Soluciones que garantizan estabilidad, durabilidad y funcionalidad.",
+    value: "Diseño alineado con los estándares de seguridad operacional más rigurosos del mercado (ej. Minera Escondida).",
     highlight: true
   },
   {
     id: 3,
     icon: <Box size={32} strokeWidth={1.5} />,
-    title: "Geomática y Modelado 3D de Faenas",
-    subtitle: "Base Cartográfica",
-    desc: "Proporcionamos la base cartográfica georreferenciada indispensable para la aprobación de Sernageomin. Levantamientos topográficos y ortofotografías con modelo 3D de alta fidelidad (hasta 400 hectáreas).",
-    value: "Datos precisos para el cumplimiento normativo y la planificación estratégica.",
+    title: "Geomática de Alta Precisión y Levantamientos 3D",
+    subtitle: "Captura Espacial",
+    desc: "Captura de datos espaciales y modelado para grandes proyectos industriales. Levantamientos topográficos georreferenciados y ortofotografías con modelos 3D de alta fidelidad (aprox. 400 hectáreas en La Negra). Fundamental para planificación de infraestructura y documentación Sernageomin (KMZ, UTM).",
+    value: "Proporcionamos la base cartográfica confiable y actualizada necesaria para la ingeniería de detalle y gestión de activos.",
     highlight: false
   },
   {
     id: 4,
     icon: <Users2 size={32} strokeWidth={1.5} />,
-    title: "Optimización de Flujos Operacionales y Logística",
-    subtitle: "Eficiencia y Bienestar",
-    desc: "Maximizamos la eficiencia y el bienestar del personal. Estudios de Carga de Ocupación y Flujos para redistribución estratégica. Diseño de soluciones para mitigar riesgos logísticos y climáticos (ej. Control Temperatura Rodoviarios).",
-    value: "Optimización del recorrido desde el bus hasta el punto de trabajo.",
+    title: "Optimización Logística y Flujos Operacionales",
+    subtitle: "Estudios de Ocupación",
+    desc: "Consultoría para mejorar eficiencia y seguridad mediante optimización de movimientos. Estudios de Carga de Ocupación, análisis de desplazamientos y Planos de Flujo e Interacciones. Optimizamos logística en terreno, reduciendo tiempos muertos y minimizando riesgos por exposición climática.",
+    value: "Reducción de tiempos muertos y minimización de riesgos laborales derivados de la exposición climática.",
     highlight: false
   },
   {
     id: 5,
     icon: <MonitorPlay size={32} strokeWidth={1.5} />,
-    title: "Ingeniería de Mantenimiento y Procedimientos Visuales (3D)",
-    subtitle: "Capacitación Visual",
-    desc: "Aseguramos la ejecución segura de procedimientos complejos. Videos de Animación 3D para ilustrar armado, desarme y desmontaje de componentes críticos (ej. Filtros PF-01, Bombas Verticales).",
-    value: "Esencial para la capacitación y planificación de tareas de alto riesgo.",
+    title: "Ingeniería de Mantenimiento y Visualización Técnica 3D",
+    subtitle: "Procedimientos Visuales",
+    desc: "Transformamos ingeniería conceptual en procedimientos visualmente explícitos. Videos de animación 3D para ilustrar armado y desarme de componentes críticos (ej. Filtros y Bombas Verticales). Asegura ejecución precisa y segura de tareas complejas de mantenimiento.",
+    value: "Herramienta esencial para la capacitación y planificación de tareas de alto riesgo (procedimientos de trabajo).",
     highlight: false
   },
   {
     id: 6,
     icon: <ShieldAlert size={32} strokeWidth={1.5} />,
-    title: "Compliance de Sustancias Peligrosas (D.S. N° 43) y Residuos",
-    subtitle: "Seguridad Normativa",
-    desc: "Garantizamos cumplimiento MINSAL. Diseño y regularización de Bodegas SUSPEL, priorizando distanciamientos críticos. Diseños para gestión de residuos enajenables alineados con requisitos HSE.",
-    value: "Cumplimiento estricto de normativas de seguridad y medio ambiente.",
+    title: "Diseño de Infraestructura Crítica y Gestión HSE",
+    subtitle: "Seguridad y Ambiente",
+    desc: "Diseño de sistemas operativos que garantizan cumplimiento de estándares de seguridad y ambiente (DOM, Sernageomin, SEREMI). Soluciones para reemplazo de componentes críticos, urbanización de patios y gestión de residuos. Seguridad física (Layout de Seguridad) según valor y criticidad.",
+    value: "Diseño orientado al Principio de Mayor Exigencia, garantizando estabilidad estructural y seguridad operacional.",
     highlight: true
   }
 ];

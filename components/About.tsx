@@ -10,23 +10,24 @@ export const About: React.FC<AboutProps> = ({ id }) => {
     <section id={id} className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          
+
           {/* Left Column: Executive Summary */}
           <div>
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-8 text-zinc-900">Perfil Corporativo</h2>
             <div className="prose prose-zinc prose-lg text-zinc-600 mb-8">
               <p>
-                <span className="font-bold text-zinc-900">SherpARQ</span> es una firma consultora consolidada con más de 15 años de trayectoria. 
-                Nos especializamos en el desarrollo integral de proyectos de Arquitectura Industrial, 
+                <span className="font-bold text-zinc-900">SherpARQ</span> es una firma consultora consolidada con más de 15 años de trayectoria.
+                Nos especializamos en el desarrollo integral de proyectos de Arquitectura Industrial,
                 Ingeniería Civil-Estructural y Diseño Urbano.
               </p>
               <p>
-                Nuestra experiencia se centra en brindar soluciones técnicas de alto nivel para la gran minería 
-                (metálica y no metálica) y el sector público, gestionando desde el diseño conceptual hasta la 
-                regularización y recepción final de obras.
+                Nuestra experiencia se centra en brindar soluciones técnicas de alto nivel para la gran minería
+                (metálica y no metálica) y el sector público. Hemos colaborado con líderes de la industria como
+                <span className="font-semibold text-zinc-800"> Albemarle Ltda., Minera Escondida Ltda., Rockwood Lithium y Altonorte</span>,
+                gestionando desde el diseño conceptual hasta la regularización y recepción final de obras.
               </p>
               <p>
-                Contamos con un equipo multidisciplinario experto en la normativa vigente, asegurando la 
+                Contamos con un equipo multidisciplinario experto en la normativa vigente, asegurando la
                 continuidad operacional y el cumplimiento legal.
               </p>
             </div>
@@ -79,21 +80,21 @@ export const About: React.FC<AboutProps> = ({ id }) => {
             </div>
 
             <div className="pt-8 border-t border-zinc-200">
-               <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-zinc-200 flex items-center justify-center text-zinc-400">
-                    <Users size={24} />
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-bold text-zinc-900">Liderazgo Técnico</h4>
-                    <p className="text-xs uppercase tracking-wider text-zinc-500">Arquitecto UCN • Esp. Patrimonio</p>
-                  </div>
-               </div>
-               <p className="mt-4 text-sm text-zinc-600 italic">
-                 "Dominio avanzado de tecnología BIM y CAD para soluciones precisas."
-               </p>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-zinc-200 flex items-center justify-center text-zinc-400">
+                  <Users size={24} />
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold text-zinc-900">Liderazgo Técnico</h4>
+                  <p className="text-xs uppercase tracking-wider text-zinc-500">Arquitecto UCN • Esp. Patrimonio</p>
+                </div>
+              </div>
+              <p className="mt-4 text-sm text-zinc-600 italic">
+                "Dominio avanzado de tecnología BIM y CAD para soluciones precisas."
+              </p>
             </div>
           </div>
-          
+
         </div>
       </div>
     </section>

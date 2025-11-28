@@ -26,13 +26,13 @@ export const Hero: React.FC<HeroProps> = ({ id }) => {
           </div>
 
           <h1 className="text-5xl md:text-7xl font-display font-bold text-zinc-900 leading-[1.1] mb-8">
-            SHERPARQ: La Experiencia del Norte <br />
-            <span className="text-zinc-500 italic font-serif">en Ingeniería de Cumplimiento Regulatorio para la Gran Minería.</span>
+            SHERPARQ: Ingeniería y <br />
+            <span className="text-zinc-500 italic font-serif">Arquitectura Industrial Especializada.</span>
           </h1>
 
           <p className="text-lg md:text-xl text-zinc-700 leading-relaxed mb-10 max-w-2xl border-l-2 border-zinc-900 pl-6">
-            **Especialistas en la Armonización de Proyectos Industriales en Antofagasta.**<br />
-            Nuestra misión es garantizar la **continuidad operacional** de su faena. Somos expertos en gestionar la **Doble Vía de Permisología**, integrando el diseño arquitectónico y la ingeniería civil con los requisitos sectoriales más estrictos: la **DOM** (Urbanismo y OGUC), la **SEREMI de Salud** (D.S. N° 43/2015) y **Sernageomin** (D.S. N° 132). Aseguramos que su proyecto cumpla con el **Principio de Mayor Exigencia** desde la concepción hasta la certificación final.
+            **Soluciones para la Gran Minería en Chile.**<br />
+            Conjunto de servicios de ingeniería y arquitectura altamente especializados en el sector industrial. Expertos en gestión regulatoria, diseño de infraestructura crítica y optimización operacional para clientes como **Albemarle**, **Minera Escondida**, **Rockwood Lithium** y **Altonorte**.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
