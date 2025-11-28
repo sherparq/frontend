@@ -49,21 +49,27 @@ export const ChatWidget: React.FC = () => {
     setIsLoading(true);
 
     try {
-      // NOTE: In production, replace URL with your Cloudflare Worker endpoint
-      // const response = await fetch('https://your-worker.your-subdomain.workers.dev/chat', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ message: text })
-      // });
-      // const data = await response.json();
-      
-      // Simulating network delay and response for frontend demo
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
+      // Llamada real al Cloudflare Worker
+      const response = await fetch('https://sherparq-backend.abogado.workers.dev', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userMessage: text })
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error del servidor: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      // Extraer el contenido de la respuesta de OpenAI
+      const aiContent = data.choices?.[0]?.message?.content ||
+        "Lo siento, hubo un problema al procesar tu consulta. Por favor intenta nuevamente.";
+
       const aiResponse: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: "Gracias por tu consulta. Basado en nuestros Nodos de Conocimiento, esta solicitud requiere un análisis de nuestra área técnica. SherpARQ se especializa en integrar esta normativa con la continuidad operacional. ¿Deseas agendar una evaluación técnica?"
+        content: aiContent
       };
 
       setMessages(prev => [...prev, aiResponse]);
@@ -85,7 +91,7 @@ export const ChatWidget: React.FC = () => {
       {/* Chat Window */}
       {isOpen && (
         <div className="bg-white w-[90vw] md:w-[400px] h-[500px] rounded-2xl shadow-2xl border border-zinc-200 flex flex-col mb-4 overflow-hidden animate-fade-in-up origin-bottom-right">
-          
+
           {/* Header */}
           <div className="bg-zinc-900 text-white p-4 flex justify-between items-center">
             <div className="flex items-center gap-3">
@@ -112,17 +118,16 @@ export const ChatWidget: React.FC = () => {
                 className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-[80%] p-3 rounded-2xl text-sm leading-relaxed ${
-                    msg.role === 'user'
+                  className={`max-w-[80%] p-3 rounded-2xl text-sm leading-relaxed ${msg.role === 'user'
                       ? 'bg-zinc-900 text-white rounded-tr-none'
                       : 'bg-white border border-zinc-200 text-zinc-700 rounded-tl-none shadow-sm'
-                  }`}
+                    }`}
                 >
                   {msg.content}
                 </div>
               </div>
             ))}
-            
+
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-white border border-zinc-200 p-3 rounded-2xl rounded-tl-none shadow-sm flex items-center gap-2">
@@ -131,7 +136,7 @@ export const ChatWidget: React.FC = () => {
                 </div>
               </div>
             )}
-            
+
             <div ref={messagesEndRef} />
           </div>
 
@@ -181,9 +186,8 @@ export const ChatWidget: React.FC = () => {
       {/* Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`group flex items-center gap-2 px-4 py-4 rounded-full shadow-xl transition-all duration-300 ${
-          isOpen ? 'bg-zinc-800 text-zinc-400 rotate-90 scale-90' : 'bg-zinc-900 text-white hover:scale-105'
-        }`}
+        className={`group flex items-center gap-2 px-4 py-4 rounded-full shadow-xl transition-all duration-300 ${isOpen ? 'bg-zinc-800 text-zinc-400 rotate-90 scale-90' : 'bg-zinc-900 text-white hover:scale-105'
+          }`}
       >
         {isOpen ? <X size={24} /> : <Bot size={28} />}
         {!isOpen && <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 text-sm font-medium whitespace-nowrap">Asistente Virtual</span>}
