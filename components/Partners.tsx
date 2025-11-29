@@ -1,11 +1,12 @@
 import React from 'react';
 
 export const Partners: React.FC = () => {
+    const BASE_URL = import.meta.env.BASE_URL;
     const partners = [
-        { name: "Minera Escondida | BHP", logo: "/logos/escondida.png" },
-        { name: "Albemarle", logo: "/logos/albemarle.png" },
-        { name: "Glencore", logo: "/logos/glencore.png" },
-        { name: "Antofagasta Minerals", logo: "/logos/ams.png" }
+        { name: "Minera Escondida | BHP", logo: `${BASE_URL}logos/escondida.png` },
+        { name: "Albemarle", logo: `${BASE_URL}logos/albemarle.png` },
+        { name: "Glencore", logo: `${BASE_URL}logos/glencore.png` },
+        { name: "Antofagasta Minerals", logo: `${BASE_URL}logos/ams.png` }
     ];
 
     return (

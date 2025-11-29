@@ -59,7 +59,7 @@ export const Contact: React.FC<ContactProps> = ({ id }) => {
           {/* Map Placeholder */}
           <div className="relative h-full min-h-[400px] bg-zinc-800 overflow-hidden border border-zinc-700 group">
             <img
-              src="/hero/antofagasta_coast.png"
+              src={`${import.meta.env.BASE_URL}hero/antofagasta_coast.png`}
               alt="Mapa Antofagasta"
               className="w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-500 grayscale"
             />
