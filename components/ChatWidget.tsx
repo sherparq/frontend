@@ -185,14 +185,40 @@ export const ChatWidget: React.FC = () => {
       )}
 
       {/* Toggle Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className={`group flex items-center gap-2 px-4 py-4 rounded-full shadow-xl transition-all duration-300 ${isOpen ? 'bg-zinc-800 text-zinc-400 rotate-90 scale-90' : 'bg-zinc-900 text-white hover:scale-105'
-          }`}
-      >
-        {isOpen ? <X size={24} /> : <Bot size={28} />}
-        {!isOpen && <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 text-sm font-medium whitespace-nowrap">Asistente Virtual</span>}
-      </button>
+      <div className="relative group">
+        {/* Tooltip / Callout */}
+        {!isOpen && (
+          <div className="absolute bottom-full right-0 mb-4 w-64 bg-white px-4 py-3 rounded-xl shadow-xl border border-zinc-200 animate-fade-in-up origin-bottom-right">
+            <div className="text-sm font-bold text-zinc-900 mb-1">¿Dudas Técnicas?</div>
+            <div className="text-xs text-zinc-600">Pregúntanos, encontraremos la solución para tu proyecto.</div>
+            {/* Arrow */}
+            <div className="absolute -bottom-2 right-6 w-4 h-4 bg-white transform rotate-45 border-r border-b border-zinc-200"></div>
+          </div>
+        )}
+
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className={`group flex items-center gap-2 px-4 py-4 rounded-full shadow-xl transition-all duration-300 ${isOpen
+            ? 'bg-zinc-800 text-zinc-400 rotate-90 scale-90'
+            : 'bg-zinc-900 text-white hover:scale-105'
+            }`}
+        >
+          {isOpen ? (
+            <X size={24} />
+          ) : (
+            <>
+              <div className="relative">
+                <Bot size={28} className="text-yellow-400" />
+                <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 border-2 border-zinc-900 rounded-full animate-ping"></span>
+                <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 border-2 border-zinc-900 rounded-full animate-pulse"></span>
+              </div>
+              <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 text-sm font-bold whitespace-nowrap pl-1">
+                Asistente IA
+              </span>
+            </>
+          )}
+        </button>
+      </div>
     </div>
   );
 };

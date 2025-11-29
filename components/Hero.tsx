@@ -11,6 +11,7 @@ export const Hero: React.FC<HeroProps> = ({ id }) => {
 
   useEffect(() => {
     // Select a random image on mount
+    // Ensure we are using local images from heroImages.ts
     const randomIndex = Math.floor(Math.random() * heroImages.length);
     setCurrentImage(heroImages[randomIndex]);
   }, []);
@@ -46,8 +47,8 @@ export const Hero: React.FC<HeroProps> = ({ id }) => {
           </h1>
 
           <p className="text-lg md:text-xl text-zinc-700 leading-relaxed mb-10 max-w-2xl border-l-2 border-zinc-900 pl-6">
-            **Soluciones para la Gran Minería en Chile.**<br />
-            Conjunto de servicios de ingeniería y arquitectura altamente especializados en el sector industrial. Expertos en gestión regulatoria, diseño de infraestructura crítica y optimización operacional para clientes como **Albemarle**, **Minera Escondida**, **Rockwood Lithium** y **Altonorte**.
+            <strong>Soluciones para la Gran Minería en Chile.</strong><br />
+            Conjunto de servicios de ingeniería y arquitectura altamente especializados en el sector industrial. Expertos en gestión regulatoria, diseño de infraestructura crítica y optimización operacional para clientes como <strong>Albemarle</strong>, <strong>Minera Escondida</strong>, <strong>Rockwood Lithium</strong> y <strong>Altonorte</strong>.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">

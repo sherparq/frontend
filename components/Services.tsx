@@ -81,7 +81,7 @@ export const Services: React.FC<ServicesProps> = ({ id }) => {
           <div className="max-w-3xl">
             <span className="text-xs font-bold tracking-[0.2em] uppercase text-zinc-500 mb-2 block">Nuestra Oferta de Valor</span>
             <h2 className="text-4xl md:text-5xl font-display font-bold text-zinc-900 leading-tight">
-              Cluster de Nodos <br /> de Conocimiento
+              Áreas de Expertise <br /> Estratégica
             </h2>
           </div>
           <p className="text-zinc-600 max-w-sm text-sm leading-relaxed text-right md:text-left">
@@ -99,7 +99,7 @@ export const Services: React.FC<ServicesProps> = ({ id }) => {
               `}
             >
               {/* Content Layer */}
-              <div className="relative z-10 flex flex-col h-full">
+              <div className="relative z-10 flex flex-col h-full group-hover:opacity-0 transition-opacity duration-300">
                 <div className="flex justify-between items-start mb-6">
                   <div className={`p-3 rounded-lg ${node.highlight ? 'bg-zinc-800 text-zinc-300' : 'bg-white text-zinc-900 shadow-sm'}`}>
                     {node.icon}
@@ -114,23 +114,23 @@ export const Services: React.FC<ServicesProps> = ({ id }) => {
                     {node.subtitle}
                   </span>
                   <h3 className="text-2xl font-bold mb-4 leading-tight">{node.title}</h3>
-                  <p className={`text-sm leading-relaxed mb-6 line-clamp-3 group-hover:line-clamp-none transition-all ${node.highlight ? 'text-zinc-300' : 'text-zinc-600'}`}>
+                  <p className={`text-sm leading-relaxed mb-6 line-clamp-3 ${node.highlight ? 'text-zinc-300' : 'text-zinc-600'}`}>
                     {node.desc}
                   </p>
                 </div>
+              </div>
 
-                {/* Reveal Layer (Value Add) */}
-                <div className={`absolute inset-0 z-20 p-8 flex flex-col justify-end translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out
-                  ${node.highlight ? 'bg-zinc-800/95 backdrop-blur-sm' : 'bg-white/95 backdrop-blur-sm'}
-                `}>
-                  <div className="flex items-center gap-2 mb-3">
-                    <Plus size={16} className="text-yellow-600" />
-                    <span className="text-xs font-bold uppercase tracking-widest text-yellow-600">Valor Agregado</span>
-                  </div>
-                  <p className={`text-base font-medium leading-relaxed ${node.highlight ? 'text-white' : 'text-zinc-900'}`}>
-                    {node.value}
-                  </p>
+              {/* Reveal Layer (Value Add) */}
+              <div className={`absolute inset-0 z-20 p-8 flex flex-col justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out
+                ${node.highlight ? 'bg-zinc-800' : 'bg-white'}
+              `}>
+                <div className="flex items-center gap-2 mb-4">
+                  <Plus size={16} className="text-yellow-600" />
+                  <span className="text-xs font-bold uppercase tracking-widest text-yellow-600">Impacto Estratégico</span>
                 </div>
+                <p className={`text-lg font-medium leading-relaxed ${node.highlight ? 'text-white' : 'text-zinc-900'}`}>
+                  {node.value}
+                </p>
               </div>
             </div>
           ))}

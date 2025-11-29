@@ -59,9 +59,9 @@ export const Contact: React.FC<ContactProps> = ({ id }) => {
           {/* Map Placeholder */}
           <div className="relative h-full min-h-[400px] bg-zinc-800 overflow-hidden border border-zinc-700 group">
             <img
-              src="https://picsum.photos/800/600?grayscale"
+              src="/hero/antofagasta_coast.png"
               alt="Mapa Antofagasta"
-              className="w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-500"
+              className="w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-500 grayscale"
             />
             <div className="absolute bottom-0 left-0 p-8 bg-gradient-to-t from-black/80 to-transparent w-full">
               <span className="uppercase tracking-widest text-xs font-bold text-zinc-300">Base de Operaciones</span>
