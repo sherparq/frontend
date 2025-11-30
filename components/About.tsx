@@ -1,11 +1,14 @@
 import React from 'react';
 import { Award, MapPin, Users, HardHat } from 'lucide-react';
 
+import { SelectedContext } from './ChatWidget';
+
 interface AboutProps {
   id: string;
+  onContextSelect?: (context: SelectedContext | null) => void;
 }
 
-export const About: React.FC<AboutProps> = ({ id }) => {
+export const About: React.FC<AboutProps> = ({ id, onContextSelect }) => {
   return (
     <section id={id} className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -49,30 +52,39 @@ export const About: React.FC<AboutProps> = ({ id }) => {
             <div className="mb-12">
               <h3 className="text-sm font-bold uppercase tracking-widest text-zinc-400 mb-6">Pilares Estratégicos</h3>
               <ul className="space-y-6">
-                <li className="flex items-start gap-4">
-                  <div className="mt-1 p-2 bg-white border border-zinc-200 text-zinc-700 shadow-sm">
+                <li
+                  className="flex items-start gap-4 cursor-pointer group"
+                  onClick={() => onContextSelect && onContextSelect({ type: 'value', id: 'Excelencia Técnica', title: 'Excelencia Técnica' })}
+                >
+                  <div className="mt-1 p-2 bg-white border border-zinc-200 text-zinc-700 shadow-sm group-hover:border-zinc-400 transition-colors">
                     <Award size={20} />
                   </div>
                   <div>
-                    <h4 className="font-bold text-zinc-900">Excelencia Técnica</h4>
+                    <h4 className="font-bold text-zinc-900 group-hover:text-zinc-600 transition-colors">Excelencia Técnica</h4>
                     <p className="text-sm text-zinc-600">Cumplimiento estricto de normativa y estándares de la industria.</p>
                   </div>
                 </li>
-                <li className="flex items-start gap-4">
-                  <div className="mt-1 p-2 bg-white border border-zinc-200 text-zinc-700 shadow-sm">
+                <li
+                  className="flex items-start gap-4 cursor-pointer group"
+                  onClick={() => onContextSelect && onContextSelect({ type: 'value', id: 'Enfoque Regional', title: 'Enfoque Regional' })}
+                >
+                  <div className="mt-1 p-2 bg-white border border-zinc-200 text-zinc-700 shadow-sm group-hover:border-zinc-400 transition-colors">
                     <MapPin size={20} />
                   </div>
                   <div>
-                    <h4 className="font-bold text-zinc-900">Enfoque Regional</h4>
+                    <h4 className="font-bold text-zinc-900 group-hover:text-zinc-600 transition-colors">Enfoque Regional</h4>
                     <p className="text-sm text-zinc-600">Profundo conocimiento del territorio y clima del norte de Chile.</p>
                   </div>
                 </li>
-                <li className="flex items-start gap-4">
-                  <div className="mt-1 p-2 bg-white border border-zinc-200 text-zinc-700 shadow-sm">
+                <li
+                  className="flex items-start gap-4 cursor-pointer group"
+                  onClick={() => onContextSelect && onContextSelect({ type: 'value', id: 'Seguridad Operacional', title: 'Seguridad Operacional' })}
+                >
+                  <div className="mt-1 p-2 bg-white border border-zinc-200 text-zinc-700 shadow-sm group-hover:border-zinc-400 transition-colors">
                     <HardHat size={20} />
                   </div>
                   <div>
-                    <h4 className="font-bold text-zinc-900">Seguridad Operacional</h4>
+                    <h4 className="font-bold text-zinc-900 group-hover:text-zinc-600 transition-colors">Seguridad Operacional</h4>
                     <p className="text-sm text-zinc-600">Diseño enfocado en la seguridad del trabajador y continuidad de procesos.</p>
                   </div>
                 </li>

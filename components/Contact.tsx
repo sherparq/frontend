@@ -1,11 +1,53 @@
-import React from 'react';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Mail, Phone, MapPin, MessageSquare } from 'lucide-react';
+import { SelectedContext } from './ChatWidget';
 
 interface ContactProps {
   id: string;
+  onContextSelect?: (context: SelectedContext | null) => void;
 }
 
-export const Contact: React.FC<ContactProps> = ({ id }) => {
+export const Contact: React.FC<ContactProps> = ({ id, onContextSelect }) => {
+  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
+  const [isFading, setIsFading] = useState(false);
+
+  const messages = [
+    {
+      title: "No deje la continuidad de su proyecto al azar.",
+      subtitle: "Contáctenos para una Auditoría de Compliance Regulatorio en el Norte Grande y obtenga la ruta más segura hacia su aprobación."
+    },
+    {
+      title: "¿Necesita optimizar sus operaciones?",
+      subtitle: "Ofrecemos estudios de flujo logístico y carga de ocupación para maximizar la eficiencia de su faena."
+    },
+    {
+      title: "Infraestructura crítica que cumple.",
+      subtitle: "Diseño especializado en bodegas de sustancias peligrosas y plantas de almacenamiento bajo normativa DS 43."
+    },
+    {
+      title: "Geomática de precisión para grandes proyectos.",
+      subtitle: "Levantamientos topográficos y modelos 3D de alta fidelidad para planificación industrial."
+    },
+    {
+      title: "Más de 45.000 m² gestionados exitosamente.",
+      subtitle: "Experiencia comprobada, en mineras o personas naturales proyectos de todo los tamaños, en el Norte Grande de Chile. Contáctanos."
+    }
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsFading(true);
+
+      setTimeout(() => {
+        setCurrentMessageIndex((prev) => (prev + 1) % messages.length);
+        setIsFading(false);
+      }, 500); // Fade out for 500ms, then switch
+
+    }, 5000); // Rotate every 5 seconds
+
+    return () => clearInterval(interval);
+  }, [messages.length]);
+
   return (
     <section id={id} className="py-24 bg-zinc-900 text-white">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -14,11 +56,20 @@ export const Contact: React.FC<ContactProps> = ({ id }) => {
           {/* Contact Info */}
           <div>
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-8">Hablemos de su Proyecto</h2>
-            <p className="text-zinc-400 mb-12 text-lg">
-              **No deje la continuidad de su proyecto al azar.**<br />
-              Contáctenos para una **Auditoría de Compliance Regulatorio en Antofagasta** y obtenga la ruta más segura hacia su aprobación.
-            </p>
+            <div className="text-zinc-400 mb-8 text-lg min-h-[120px]">
+              <p className={`transition-opacity duration-500 ${isFading ? 'opacity-0' : 'opacity-100'}`}>
+                <strong>{messages[currentMessageIndex].title}</strong><br />
+                {messages[currentMessageIndex].subtitle}
+              </p>
+            </div>
 
+            <button
+              onClick={() => onContextSelect && onContextSelect({ type: 'contact_form', id: 'general', title: 'Contacto' })}
+              className="mb-12 bg-zinc-100 text-zinc-900 px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-wider hover:bg-white transition-colors flex items-center gap-2"
+            >
+              <MessageSquare size={18} />
+              Iniciar Contacto Inteligente
+            </button>
             <div className="space-y-8">
               <div className="flex items-start gap-6">
                 <div className="p-4 bg-zinc-800 text-zinc-300">

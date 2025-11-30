@@ -1,7 +1,12 @@
 import React from 'react';
 import { ShieldCheck, FileText, HardHat, AlertTriangle } from 'lucide-react';
 
-export const Compliance: React.FC = () => {
+import { SelectedContext } from './ChatWidget';
+
+interface ComplianceProps {
+    onContextSelect?: (context: SelectedContext | null) => void;
+}
+export const Compliance: React.FC<ComplianceProps> = ({ onContextSelect }) => {
     const regulations = [
         {
             icon: <FileText size={32} />,
@@ -30,18 +35,28 @@ export const Compliance: React.FC = () => {
     ];
 
     return (
-        <section className="py-20 bg-zinc-900 text-zinc-100">
-            <div className="max-w-7xl mx-auto px-6 md:px-12">
-                <div className="mb-16">
-                    <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">Expertos en Normativa Crítica</h2>
-                    <p className="text-zinc-400 max-w-2xl text-lg">
-                        Nuestra arquitectura no solo es funcional, es legalmente robusta. Garantizamos el cumplimiento de los decretos más exigentes de la industria minera.
-                    </p>
+        <section id="compliance" className="py-24 bg-zinc-900 text-white relative overflow-hidden">
+            {/* Background Elements */}
+            <div className="absolute top-0 right-0 w-1/3 h-full bg-zinc-800/20 skew-x-12 transform translate-x-1/2"></div>
+
+            <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+                    <div>
+                        <span className="text-xs font-bold tracking-[0.2em] uppercase text-zinc-500 mb-2 block">Marco Regulatorio</span>
+                        <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">Expertos en Normativa Crítica</h2>
+                        <p className="text-zinc-400 max-w-xl">
+                            Navegamos la complejidad burocrática para garantizar la viabilidad legal y técnica de su inversión.
+                        </p>
+                    </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {regulations.map((item, index) => (
-                        <div key={index} className="bg-zinc-800/50 p-8 border border-zinc-700 hover:border-zinc-500 transition-colors group">
+                        <div
+                            key={index}
+                            className="bg-zinc-800/50 border border-zinc-700 p-8 hover:bg-zinc-800 transition-all duration-300 group cursor-pointer"
+                            onClick={() => onContextSelect && onContextSelect({ type: 'regulation', id: item.code, title: item.code })}
+                        >
                             <div className="text-zinc-400 mb-6 group-hover:text-white transition-colors">
                                 {item.icon}
                             </div>

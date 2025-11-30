@@ -9,8 +9,11 @@ import {
   Plus
 } from 'lucide-react';
 
+import { SelectedContext } from './ChatWidget';
+
 interface ServicesProps {
   id: string;
+  onContextSelect?: (context: SelectedContext | null) => void;
 }
 
 // Data based on the provided "Cluster de Nodos de Conocimiento"
@@ -20,7 +23,7 @@ const nodes = [
     icon: <FileCheck2 size={32} strokeWidth={1.5} />,
     title: "Gestión Regulatoria y Permisología Industrial",
     subtitle: "DOM & SEREMI",
-    desc: "Ofrecemos una gestión de permisos integral y especializada en el complejo marco normativo de Antofagasta. Tramitación de más de 45.000 m² ante la DOM para minería no metálica. Especialistas en Recepción Definitiva, regularización de instalaciones y cumplimiento de OGUC y normativas seccionales (ej. La Negra).",
+    desc: "Ofrecemos una gestión de permisos integral y especializada en el complejo marco normativo del Norte Grande. Tramitación de más de 45.000 m² ante la DOM para minería no metálica. Especialistas en Recepción Definitiva, regularización de instalaciones y cumplimiento de OGUC y normativas seccionales (ej. La Negra).",
     value: "Mitigación del riesgo de permisología al abordar la doble vía de aprobación (DOM/SEREMI/Sernageomin).",
     highlight: false
   },
@@ -71,7 +74,7 @@ const nodes = [
   }
 ];
 
-export const Services: React.FC<ServicesProps> = ({ id }) => {
+export const Services: React.FC<ServicesProps> = ({ id, onContextSelect }) => {
   return (
     <section id={id} className="py-24 bg-white relative">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -94,9 +97,10 @@ export const Services: React.FC<ServicesProps> = ({ id }) => {
           {nodes.map((node) => (
             <div
               key={node.id}
-              className={`group relative overflow-hidden p-8 border transition-all duration-500 hover:shadow-2xl flex flex-col justify-between h-[400px]
+              className={`group relative overflow-hidden p-8 border transition-all duration-500 hover:shadow-2xl flex flex-col justify-between h-[400px] cursor-pointer
                 ${node.highlight ? 'bg-zinc-900 border-zinc-900 text-white' : 'bg-zinc-50 border-zinc-200 text-zinc-900 hover:border-zinc-400'}
               `}
+              onClick={() => onContextSelect && onContextSelect({ type: 'service', id: node.title, title: node.title })}
             >
               {/* Content Layer */}
               <div className="relative z-10 flex flex-col h-full group-hover:opacity-0 transition-opacity duration-300">

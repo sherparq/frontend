@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { ChevronRight } from 'lucide-react';
 
+import { SelectedContext } from './ChatWidget';
+
 interface PortfolioProps {
   id: string;
+  onContextSelect?: (context: SelectedContext | null) => void;
 }
 
 type Category = 'ALL' | 'MINING' | 'INDUSTRIAL' | 'INFRASTRUCTURE' | 'ENGINEERING' | 'URBAN';
@@ -14,7 +17,7 @@ interface Project {
   metrics?: string;
 }
 
-export const Portfolio: React.FC<PortfolioProps> = ({ id }) => {
+export const Portfolio: React.FC<PortfolioProps> = ({ id, onContextSelect }) => {
   const [filter, setFilter] = useState<Category>('ALL');
 
   const categories: { id: Category; label: string }[] = [
@@ -118,18 +121,17 @@ export const Portfolio: React.FC<PortfolioProps> = ({ id }) => {
               Una muestra de nuestra experiencia técnica. Por acuerdos de confidencialidad, se omiten nombres específicos de clientes.
             </p>
           </div>
-          
+
           {/* Filter Buttons */}
           <div className="flex flex-wrap gap-2 justify-start md:justify-end">
             {categories.map(cat => (
               <button
                 key={cat.id}
                 onClick={() => setFilter(cat.id)}
-                className={`text-xs uppercase tracking-wider px-4 py-2 border transition-all duration-300 ${
-                  filter === cat.id 
-                    ? 'bg-zinc-900 text-white border-zinc-900' 
+                className={`text-xs uppercase tracking-wider px-4 py-2 border transition-all duration-300 ${filter === cat.id
+                    ? 'bg-zinc-900 text-white border-zinc-900'
                     : 'bg-transparent text-zinc-500 border-zinc-200 hover:border-zinc-400 hover:text-zinc-900'
-                }`}
+                  }`}
               >
                 {cat.label}
               </button>
@@ -140,24 +142,28 @@ export const Portfolio: React.FC<PortfolioProps> = ({ id }) => {
         {/* Project Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
           {filteredProjects.map((project, idx) => (
-            <div key={idx} className="group flex flex-col animate-fade-in">
+            <div
+              key={idx}
+              className="group flex flex-col animate-fade-in cursor-pointer"
+              onClick={() => onContextSelect && onContextSelect({ type: 'project', id: project.title, title: project.title })}
+            >
               {/* Visual placeholder for project */}
               <div className="w-full h-2 bg-zinc-100 mb-4 relative overflow-hidden">
                 <div className="absolute top-0 left-0 h-full bg-zinc-900 w-0 group-hover:w-full transition-all duration-700 ease-out"></div>
               </div>
-              
+
               <span className="text-[0.65rem] font-bold uppercase tracking-widest text-zinc-400 mb-2">
                 {categories.find(c => c.id === project.category)?.label}
               </span>
-              
+
               <h3 className="text-xl font-bold text-zinc-900 mb-3 group-hover:text-zinc-600 transition-colors">
                 {project.title}
               </h3>
-              
+
               <p className="text-zinc-600 text-sm leading-relaxed mb-4 flex-grow">
                 {project.description}
               </p>
-              
+
               {project.metrics && (
                 <div className="mt-auto pt-4 border-t border-zinc-100">
                   <span className="text-xs font-semibold text-zinc-800">{project.metrics}</span>

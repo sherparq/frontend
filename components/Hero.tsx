@@ -28,27 +28,29 @@ export const Hero: React.FC<HeroProps> = ({ id }) => {
         <div className="absolute inset-0 bg-gradient-to-r from-zinc-100/90 via-zinc-100/40 to-transparent" />
 
         {/* Image Location/Title Badge */}
-        <div className="absolute bottom-8 right-8 hidden md:flex flex-col items-end z-20 opacity-60">
+        <div className="absolute bottom-8 left-8 hidden md:flex flex-col items-start z-20 opacity-60">
+
           <span className="text-xs font-bold tracking-widest uppercase text-zinc-900">{currentImage.title}</span>
           <span className="text-[10px] uppercase tracking-wider text-zinc-600">{currentImage.location}</span>
         </div>
-      </div>
+      </div >
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full pt-20">
         <div className="max-w-4xl animate-fade-in-up">
-          <div className="flex items-center gap-3 mb-6">
-            <Hexagon size={16} className="text-zinc-900 fill-zinc-900" />
-            <span className="text-xs font-bold tracking-[0.25em] uppercase text-zinc-900">Soluciones de Ingeniería y Gestión</span>
-          </div>
 
           <h1 className="text-5xl md:text-7xl font-display font-bold text-zinc-900 leading-[1.1] mb-8">
-            SHERPARQ: Ingeniería y <br />
-            <span className="text-zinc-500 italic font-serif">Arquitectura Industrial Especializada.</span>
+            <div className="flex items-center gap-3 mb-6">
+              <Hexagon size={46} className="text-zinc-900 fill-zinc-900" />
+              SherpARQ: <br />
+            </div>
+
+
+            <span className="text-zinc-500 italic font-serif">Ingeniería y Arquitectura Industrial Especializada.</span>
           </h1>
 
           <p className="text-lg md:text-xl text-zinc-700 leading-relaxed mb-10 max-w-2xl border-l-2 border-zinc-900 pl-6">
             <strong>Soluciones para la Gran Minería en Chile.</strong><br />
-            Conjunto de servicios de ingeniería y arquitectura altamente especializados en el sector industrial. Expertos en gestión regulatoria, diseño de infraestructura crítica y optimización operacional para clientes como <strong>Albemarle</strong>, <strong>Minera Escondida</strong>, <strong>Rockwood Lithium</strong> y <strong>Altonorte</strong>.
+            Conjunto de servicios de ingeniería y arquitectura altamente especializados en el sector industrial. Expertos en gestión regulatoria, diseño de infraestructura crítica y optimización operacional para clientes como <i>Albemarle</i>, <i>Minera Escondida</i>, <i>Rockwood Lithium</i> y <i>Altonorte</i>.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
@@ -66,22 +68,23 @@ export const Hero: React.FC<HeroProps> = ({ id }) => {
             </a>
           </div>
         </div>
-      </div>
+      </div >
 
-      {/* Tech decoration elements */}
-      <div className="absolute bottom-0 right-0 p-12 hidden lg:block opacity-50">
+      {/* Tech decoration elements - centered to avoid chatbot overlap */}
+      < div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 p-12 hidden lg:block opacity-50" >
         <div className="flex gap-8">
-          <div className="text-right">
+          <div className="text-center">
             <span className="block text-3xl font-bold text-zinc-900">15+</span>
             <span className="text-xs uppercase tracking-widest text-zinc-600">Años Exp.</span>
           </div>
           <div className="w-[1px] h-12 bg-zinc-400"></div>
-          <div className="text-right">
+          <div className="text-center">
             <span className="block text-3xl font-bold text-zinc-900">45k</span>
             <span className="text-xs uppercase tracking-widest text-zinc-600">m² Gestionados</span>
           </div>
         </div>
-      </div>
-    </section>
+      </div >
+
+    </section >
   );
 };

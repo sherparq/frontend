@@ -5,9 +5,23 @@ interface Message {
   id: string;
   role: 'user' | 'assistant';
   content: string;
+  isContext?: boolean;
+  source?: 'click' | 'auto';
 }
 
-export const ChatWidget: React.FC = () => {
+export interface SelectedContext {
+  type: 'regulation' | 'project' | 'service' | 'partner' | 'value' | 'contact_form';
+  id: string;
+  title: string;
+}
+
+interface ChatWidgetProps {
+  activeSection?: string;
+  selectedContext?: SelectedContext | null;
+  onContextSelect?: (context: SelectedContext | null) => void;
+}
+
+export const ChatWidget: React.FC<ChatWidgetProps> = ({ activeSection, selectedContext, onContextSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -18,6 +32,8 @@ export const ChatWidget: React.FC = () => {
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isFading, setIsFading] = useState(false);
+  const [previousSection, setPreviousSection] = useState(activeSection);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -27,6 +43,131 @@ export const ChatWidget: React.FC = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages, isOpen]);
+
+  // Trigger when a specific context is selected
+  useEffect(() => {
+    if (!selectedContext) return;
+
+    let messageContent = '';
+    if (selectedContext.type === 'regulation') {
+      messageContent = `Veo que te interesa la norma **${selectedContext.title}**. ¿Quieres saber más detalles sobre su aplicación en proyectos?`;
+    } else if (selectedContext.type === 'project') {
+      messageContent = `El proyecto **${selectedContext.title}** es un gran ejemplo de nuestra experiencia. ¿Te gustaría saber más sobre los desafíos técnicos que resolvimos?`;
+    } else if (selectedContext.type === 'service') {
+      messageContent = `¿Te interesa nuestro servicio de **${selectedContext.title}**? Puedo explicarte cómo aporta valor a tu operación.`;
+    } else if (selectedContext.type === 'partner') {
+      messageContent = `Hemos trabajado exitosamente con **${selectedContext.title}**. ¿Te gustaría conocer nuestra experiencia en proyectos similares?`;
+    } else if (selectedContext.type === 'value') {
+      messageContent = `La **${selectedContext.title}** es fundamental para nosotros. ¿Quieres saber cómo la aplicamos en cada proyecto?`;
+    } else if (selectedContext.type === 'contact_form') {
+      messageContent = `Estoy listo,¿Para empezar, podrías indicarme alguna información como tu nombre, email o el tipo de proyecto o consulta que necesitas evaluar?`;
+    }
+
+    const contextMessage: Message = {
+      id: Date.now().toString(),
+      role: 'assistant',
+      content: messageContent,
+      isContext: true,
+      source: 'click'
+    };
+
+    setMessages(prev => {
+      // Keep the first greeting message (index 0)
+      const [first, ...rest] = prev;
+      // Remove any previous context messages
+      const filtered = rest.filter(m => !m.isContext);
+      return [first, ...filtered, contextMessage];
+    });
+
+    setIsOpen(true);
+
+    // We do NOT reset selectedContext immediately here to allow it to persist as "active"
+    // But if we want to allow re-clicking the same item, we might need to.
+    // However, keeping it allows us to know we are in a "specific" context.
+    // Let's reset it via the parent prop if needed, but for local logic, 
+    // we can rely on the message 'source' property.
+    if (onContextSelect) {
+      onContextSelect(null);
+    }
+  }, [selectedContext, onContextSelect]);
+
+  // Alternative B: Section change detection with smooth transitions
+  useEffect(() => {
+    if (!isOpen) return;
+    if (activeSection === previousSection) return;
+
+    const lastMsg = messages[messages.length - 1];
+
+    // Only proceed if there's a context message to replace
+    if (!lastMsg?.isContext) {
+      setPreviousSection(activeSection);
+      return;
+    }
+
+    // Start fade-out transition
+    setIsFading(true);
+
+    // After 1s fade-out, update the message
+    const fadeTimer = setTimeout(() => {
+      let contextContent = '';
+      if (activeSection === 'portfolio') contextContent = 'Estás viendo nuestra selección de proyectos. ¿Te gustaría conocer detalles de alguno en particular?';
+      else if (activeSection === 'services') contextContent = '¿Buscas una solución específica entre nuestros servicios?';
+      else if (activeSection === 'contact') contextContent = '¿Listo para iniciar tu proyecto? Hablemos.';
+      else if (activeSection === 'about') contextContent = 'Conoce nuestra trayectoria y pilares estratégicos.';
+      else if (activeSection === 'compliance') contextContent = 'Haz clic en una norma para obtener ayuda específica.';
+      else if (activeSection === 'about') contextContent = 'Conoce nuestra trayectoria y pilares estratégicos.';
+      else if (activeSection === 'compliance') contextContent = 'Haz clic en una norma para obtener ayuda específica.';
+      // Removed generic home message as requested to avoid redundancy
+
+      if (contextContent) {
+        setMessages(prev => {
+          const last = prev[prev.length - 1];
+          if (last?.isContext) {
+            const newMessage: Message = {
+              id: Date.now().toString(),
+              role: 'assistant',
+              content: contextContent,
+              isContext: true,
+              source: 'auto'
+            };
+            return [...prev.slice(0, -1), newMessage];
+          }
+          return prev;
+        });
+      } else {
+        // Remove context message if no content for this section
+        setMessages(prev => {
+          const last = prev[prev.length - 1];
+          if (last?.isContext) {
+            return prev.slice(0, -1);
+          }
+          return prev;
+        });
+      }
+
+      // End fade, start fade-in
+      setIsFading(false);
+      setPreviousSection(activeSection);
+    }, 1000); // 1s fade-out duration
+
+    return () => clearTimeout(fadeTimer);
+  }, [activeSection, isOpen, messages, previousSection]);
+
+  // Reset chat when closed
+  useEffect(() => {
+    if (!isOpen) {
+      // Reset to initial state
+      setMessages([
+        {
+          id: '1',
+          role: 'assistant',
+          content: 'Hola. Soy la IA de SherpARQ. ¿Qué solución técnica o regulatoria necesitas implementar?'
+        }
+      ]);
+      setPreviousSection(activeSection);
+      setIsFading(false);
+    }
+  }, [isOpen, activeSection]);
 
   const suggestions = [
     "Tramitación de permisos DOM",
@@ -113,10 +254,13 @@ export const ChatWidget: React.FC = () => {
 
           {/* Messages Area */}
           <div className="flex-grow overflow-y-auto p-4 bg-zinc-50 space-y-4">
-            {messages.map((msg) => (
+            {messages.map((msg, index) => (
               <div
                 key={msg.id}
-                className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} ${msg.isContext && isFading && index === messages.length - 1
+                  ? 'opacity-0 transition-opacity duration-1000'
+                  : 'opacity-100 transition-opacity duration-1000'
+                  }`}
               >
                 <div
                   className={`max-w-[80%] p-3 rounded-2xl text-sm leading-relaxed ${msg.role === 'user'
@@ -124,7 +268,15 @@ export const ChatWidget: React.FC = () => {
                     : 'bg-white border border-zinc-200 text-zinc-700 rounded-tl-none shadow-sm'
                     }`}
                 >
-                  {msg.content}
+                  {msg.content.split(/(\*\*.*?\*\*)/).map((part, i) =>
+                    part.startsWith('**') && part.endsWith('**') ? (
+                      <strong key={i} className="font-bold text-zinc-900">
+                        {part.slice(2, -2)}
+                      </strong>
+                    ) : (
+                      <span key={i}>{part}</span>
+                    )
+                  )}
                 </div>
               </div>
             ))}
@@ -189,8 +341,22 @@ export const ChatWidget: React.FC = () => {
         {/* Tooltip / Callout */}
         {!isOpen && (
           <div className="absolute bottom-full right-0 mb-4 w-64 bg-white px-4 py-3 rounded-xl shadow-xl border border-zinc-200 animate-fade-in-up origin-bottom-right">
-            <div className="text-sm font-bold text-zinc-900 mb-1">¿Dudas Técnicas?</div>
-            <div className="text-xs text-zinc-600">Pregúntanos, encontraremos la solución para tu proyecto.</div>
+            <div className="text-sm font-bold text-zinc-900 mb-1">
+              {activeSection === 'compliance' ? 'Expertos en Normativa Crítica' :
+                activeSection === 'portfolio' ? 'Portafolio Seleccionado' :
+                  activeSection === 'services' ? 'Nuestros Servicios' :
+                    activeSection === 'contact' ? 'Hablemos de tu Proyecto' :
+                      activeSection === 'about' ? 'Perfil Corporativo' :
+                        '¿Consultas, dudas?'}
+            </div>
+            <div className="text-xs text-zinc-600">
+              {activeSection === 'compliance' ? 'Haz clic en una norma para obtener ayuda específica.' :
+                activeSection === 'portfolio' ? 'Explora nuestros proyectos más destacados.' :
+                  activeSection === 'services' ? 'Descubre cómo podemos potenciar tu inversión.' :
+                    activeSection === 'contact' ? 'Contáctanos para una asesoría personalizada.' :
+                      activeSection === 'about' ? 'Conoce nuestra experiencia y pilares estratégicos.' :
+                        'Pregúntanos, tenemos la solución a tu proyecto.'}
+            </div>
             {/* Arrow */}
             <div className="absolute -bottom-2 right-6 w-4 h-4 bg-white transform rotate-45 border-r border-b border-zinc-200"></div>
           </div>

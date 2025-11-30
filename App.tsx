@@ -6,7 +6,7 @@ import { Services } from './components/Services';
 import { Portfolio } from './components/Portfolio';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
-import { ChatWidget } from './components/ChatWidget';
+import { ChatWidget, SelectedContext } from './components/ChatWidget';
 
 import { Partners } from './components/Partners';
 import { Compliance } from './components/Compliance';
@@ -15,10 +15,11 @@ import { SafetyStats } from './components/SafetyStats';
 const App: React.FC = () => {
   // Simple scroll spy state to highlight navbar items
   const [activeSection, setActiveSection] = useState('home');
+  const [selectedContext, setSelectedContext] = useState<SelectedContext | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'services', 'portfolio', 'contact'];
+      const sections = ['home', 'about', 'services', 'portfolio', 'contact', 'compliance'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -43,16 +44,16 @@ const App: React.FC = () => {
       <Navbar activeSection={activeSection} />
       <main className="flex-grow">
         <Hero id="home" />
-        <Partners />
-        <Services id="services" />
-        <Compliance />
+        <Partners onContextSelect={setSelectedContext} />
+        <Services id="services" onContextSelect={setSelectedContext} />
+        <Compliance onContextSelect={setSelectedContext} />
         <SafetyStats />
-        <About id="about" />
-        <Portfolio id="portfolio" />
-        <Contact id="contact" />
+        <About id="about" onContextSelect={setSelectedContext} />
+        <Portfolio id="portfolio" onContextSelect={setSelectedContext} />
+        <Contact id="contact" onContextSelect={setSelectedContext} />
       </main>
       <Footer />
-      <ChatWidget />
+      <ChatWidget activeSection={activeSection} selectedContext={selectedContext} onContextSelect={setSelectedContext} />
     </div>
   );
 };

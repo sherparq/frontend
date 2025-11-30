@@ -18,7 +18,7 @@ export const heroImages: HeroImage[] = [
         url: `${BASE_URL}hero/mining_truck.png`,
         alt: "Infraestructura minera a gran escala",
         title: "Infraestructura Minera",
-        location: "Región de Antofagasta"
+        location: "Norte Grande"
     },
     {
         url: `${BASE_URL}hero/lithium_salt_flat.png`,

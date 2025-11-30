@@ -1,12 +1,18 @@
 import React from 'react';
 
-export const Partners: React.FC = () => {
+import { SelectedContext } from './ChatWidget';
+
+interface PartnersProps {
+    onContextSelect?: (context: SelectedContext | null) => void;
+}
+
+export const Partners: React.FC<PartnersProps> = ({ onContextSelect }) => {
     const BASE_URL = import.meta.env.BASE_URL;
     const partners = [
-        { name: "Minera Escondida | BHP", logo: `${BASE_URL}logos/escondida.png` },
-        { name: "Albemarle", logo: `${BASE_URL}logos/albemarle.png` },
-        { name: "Glencore", logo: `${BASE_URL}logos/glencore.png` },
-        { name: "Antofagasta Minerals", logo: `${BASE_URL}logos/ams.png` }
+        { name: "Minera Escondida | BHP", logo: `${BASE_URL}logos/bhp.svg` },
+        { name: "Albemarle", logo: `${BASE_URL}logos/albemarle.svg` },
+        { name: "Glencore", logo: `${BASE_URL}logos/glencore.svg` },
+        { name: "Antofagasta Minerals", logo: `${BASE_URL}logos/antofagasta-minerals.svg` }
     ];
 
     return (
@@ -18,7 +24,11 @@ export const Partners: React.FC = () => {
 
                 <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
                     {partners.map((partner, index) => (
-                        <div key={index} className="w-32 md:w-40 flex flex-col items-center justify-center gap-4 group">
+                        <div
+                            key={index}
+                            className="w-32 md:w-40 flex flex-col items-center justify-center gap-4 group cursor-pointer"
+                            onClick={() => onContextSelect && onContextSelect({ type: 'partner', id: partner.name, title: partner.name })}
+                        >
                             <img
                                 src={partner.logo}
                                 alt={partner.name}
