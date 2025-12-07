@@ -191,7 +191,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ activeSection, selectedC
 
     try {
       // Llamada real al Cloudflare Worker
-      const apiUrl = import.meta.env.VITE_API_URL || 'https://sherparq-backend.abogado.workers.dev';
+      const apiUrl = import.meta.env.VITE_API_URL || 'https://one-shot-chatgpt.abogado.workers.dev';
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
