@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Search, Loader2, FileText, AlertCircle, Check, ChevronDown, ChevronUp } from 'lucide-react';
+import { Search, Loader2, FileText, AlertCircle, Check, ChevronDown, ChevronUp, Mail, MessageCircle, Phone } from 'lucide-react';
 
 interface SearchResult {
     id?: string;
@@ -25,7 +25,12 @@ export const Normativa: React.FC = () => {
     const [availableFields, setAvailableFields] = useState<string[]>([]);
     const [isFieldSelectorOpen, setIsFieldSelectorOpen] = useState(false);
     const [generatingReport, setGeneratingReport] = useState(false);
-    const [reportContent, setReportContent] = useState<string | null>(null);
+    const [reportData, setReportData] = useState<{
+        informe: string;
+        email_subject: string;
+        email_body: string;
+        whatsapp_text: string;
+    } | null>(null);
 
     const handleSearch = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -34,7 +39,7 @@ export const Normativa: React.FC = () => {
         setLoading(true);
         setError('');
         setResults(null);
-        setReportContent(null);
+        setReportData(null);
         setAvailableFields([]);
         // Do NOT reset selectedFields here to persist user selection
 
@@ -108,7 +113,7 @@ export const Normativa: React.FC = () => {
         if (!results?.result?.hits || results.result.hits.length === 0) return;
 
         setGeneratingReport(true);
-        setReportContent(null);
+        setReportData(null);
 
         try {
             const context = results.result.hits.map((hit, index) => {
@@ -127,9 +132,19 @@ Dictamen ${index + 1} (Relevancia: ${score}):
 `;
             }).join('\n-------------------\n');
 
-            const systemPrompt = "Eres un abogado experto en normativa administrativa. Tu tarea es elaborar un informe jurídico que responda a la consulta del usuario basándote EXCLUSIVAMENTE en los dictámenes proporcionados en el contexto. Cita los dictámenes relevantes por su título o materia.";
+            const systemPrompt = `Eres un abogado experto en normativa administrativa. Tu tarea es elaborar un informe jurídico que responda a la consulta del usuario basándote EXCLUSIVAMENTE en los dictámenes proporcionados en el contexto.
+            
+            INSTRUCCIÓN CLAVE: Debes citar explícitamente los dictámenes (por su número, ID o título) dentro del texto del informe cada vez que utilices su información para fundamentar tus conclusiones.
+            
+            IMPORTANTE: Tu respuesta DEBE ser un objeto JSON válido (sin bloques de código markdown) con la siguiente estructura exacta:
+            {
+                "informe": "Texto completo del informe jurídico en formato markdown, incluyendo las citas a los dictámenes en el cuerpo del texto.",
+                "email_subject": "Asunto sugerido para un correo de contacto profesional",
+                "email_body": "Cuerpo del correo para solicitar servicios a SherpARQ, resumiendo brevemente el hallazgo y la necesidad de asesoría",
+                "whatsapp_text": "Mensaje breve y directo para iniciar contacto por WhatsApp con SherpARQ sobre este tema"
+            }`;
 
-            const userMessage = `Consulta del usuario: "${query}"\n\nContexto Normativo (Dictámenes más relevantes):\n${context}\n\nPor favor, emite un informe jurídico detallado respondiendo a la consulta.`;
+            const userMessage = `Consulta del usuario: "${query}"\n\nContexto Normativo (Dictámenes más relevantes):\n${context}\n\nPor favor, emite el informe y los textos de contacto en formato JSON.`;
 
             const response = await fetch('https://one-shot-chatgpt.abogado.workers.dev', {
                 method: 'POST',
@@ -147,14 +162,32 @@ Dictamen ${index + 1} (Relevancia: ${score}):
             }
 
             const data = await response.json();
-            // The worker returns OpenAI response format, usually choices[0].message.content
-            // Based on the worker code: return new Response(JSON.stringify(data)... where data is from openai
-            const content = data.choices?.[0]?.message?.content || "No se pudo generar el informe.";
-            setReportContent(content);
+            const content = data.choices?.[0]?.message?.content;
+
+            try {
+                // Remove markdown code blocks if present
+                const cleanContent = content.replace(/```json\n?|\n?```/g, '').trim();
+                const parsedData = JSON.parse(cleanContent);
+                setReportData(parsedData);
+            } catch (e) {
+                console.error("Error parsing JSON response", e);
+                // Fallback if parsing fails
+                setReportData({
+                    informe: content || "Error al procesar el formato del informe.",
+                    email_subject: "Consulta Normativa SherpARQ",
+                    email_body: `Hola, he revisado normativa sobre "${query}" y me gustaría asesoría experta.`,
+                    whatsapp_text: `Hola, necesito asesoría sobre normativa relacionada con: ${query}`
+                });
+            }
 
         } catch (err) {
             console.error(err);
-            setReportContent("Hubo un error al generar el informe. Por favor intente nuevamente.");
+            setReportData({
+                informe: "Hubo un error al generar el informe. Por favor intente nuevamente.",
+                email_subject: "",
+                email_body: "",
+                whatsapp_text: ""
+            });
         } finally {
             setGeneratingReport(false);
         }
@@ -348,14 +381,46 @@ Dictamen ${index + 1} (Relevancia: ${score}):
                                     )}
                                 </button>
 
-                                {reportContent && (
+                                {reportData && (
                                     <div className="w-full bg-white p-8 rounded-2xl border border-zinc-200 shadow-lg animate-in fade-in slide-in-from-bottom-4 duration-500">
                                         <h3 className="text-2xl font-bold text-zinc-900 mb-6 flex items-center gap-2">
                                             <FileText className="w-6 h-6 text-zinc-700" />
                                             Informe Jurídico Generado
                                         </h3>
-                                        <div className="prose prose-zinc max-w-none text-zinc-700 leading-relaxed whitespace-pre-wrap">
-                                            {reportContent}
+                                        <div className="prose prose-zinc max-w-none text-zinc-700 leading-relaxed whitespace-pre-wrap mb-8">
+                                            {reportData.informe}
+                                        </div>
+
+                                        <div className="border-t border-zinc-100 pt-8">
+                                            <h4 className="text-lg font-semibold text-zinc-900 mb-4 text-center">¿Necesitas asesoría experta sobre este tema?</h4>
+                                            <div className="flex flex-wrap justify-center gap-4">
+                                                <a
+                                                    href={`mailto:contacto@sherparq.cl?subject=${encodeURIComponent(reportData.email_subject)}&body=${encodeURIComponent(reportData.email_body)}`}
+                                                    className="flex items-center gap-2 px-6 py-3 bg-zinc-100 text-zinc-700 rounded-xl hover:bg-zinc-200 transition-colors font-medium"
+                                                >
+                                                    <Mail className="w-5 h-5" />
+                                                    Contactar por Email
+                                                </a>
+                                                <a
+                                                    href={`https://wa.me/56912345678?text=${encodeURIComponent(reportData.whatsapp_text)}`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="flex items-center gap-2 px-6 py-3 bg-green-50 text-green-700 rounded-xl hover:bg-green-100 transition-colors font-medium"
+                                                >
+                                                    <MessageCircle className="w-5 h-5" />
+                                                    WhatsApp
+                                                </a>
+                                                <div className="flex flex-col items-center gap-2">
+                                                    <a
+                                                        href="tel:+56912345678"
+                                                        className="flex items-center gap-2 px-6 py-3 bg-blue-50 text-blue-700 rounded-xl hover:bg-blue-100 transition-colors font-medium"
+                                                    >
+                                                        <Phone className="w-5 h-5" />
+                                                        Llamar
+                                                    </a>
+                                                    <span className="text-sm text-zinc-500 font-medium">+56 9 1234 5678</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 )}
