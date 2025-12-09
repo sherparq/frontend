@@ -9,7 +9,6 @@ export const Footer: React.FC = () => {
     { name: 'LinkedIn', icon: <Linkedin size={18} strokeWidth={1.5} />, href: 'https://www.linkedin.com' },
     { name: 'Instagram', icon: <Instagram size={18} strokeWidth={1.5} />, href: 'https://www.instagram.com' },
     { name: 'X', icon: <Twitter size={18} strokeWidth={1.5} />, href: 'https://twitter.com' },
-    { name: 'Telegram', icon: <Send size={18} strokeWidth={1.5} />, href: 'https://telegram.org' },
     { name: 'WhatsApp', icon: <MessageCircle size={18} strokeWidth={1.5} />, href: 'https://wa.me/56990899725' },
   ];
 
@@ -17,13 +16,13 @@ export const Footer: React.FC = () => {
     <footer className="bg-zinc-950 py-16 text-zinc-500 text-sm border-t border-zinc-900">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-          
+
           <div className="col-span-1 md:col-span-2">
             <a href="#home" className="inline-block mb-6 text-white">
-               <span className="font-bold text-2xl tracking-tight">Sherp<span className="font-light">ARQ</span></span>
+              <span className="font-bold text-2xl tracking-tight">Sherp<span className="font-light">ARQ</span></span>
             </a>
             <p className="max-w-sm text-zinc-500 leading-relaxed mb-6">
-              Soluciones técnicas integrales para la gran minería y el sector urbano. 
+              Soluciones técnicas integrales para la gran minería y el sector urbano.
               Arquitectura, Ingeniería y Gestión de Proyectos en el norte de Chile.
             </p>
           </div>
@@ -38,21 +37,21 @@ export const Footer: React.FC = () => {
           </div>
 
           <div>
-             <h4 className="text-white font-bold mb-6">Conectar</h4>
-             <div className="flex gap-4 flex-wrap">
-                {socials.map((social) => (
-                  <a
-                    key={social.name}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center text-zinc-400 hover:bg-white hover:text-black transition-all duration-300"
-                    aria-label={social.name}
-                  >
-                    {social.icon}
-                  </a>
-                ))}
-             </div>
+            <h4 className="text-white font-bold mb-6">Conectar</h4>
+            <div className="flex gap-4 flex-wrap">
+              {socials.map((social) => (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center text-zinc-400 hover:bg-white hover:text-black transition-all duration-300"
+                  aria-label={social.name}
+                >
+                  {social.icon}
+                </a>
+              ))}
+            </div>
           </div>
 
         </div>

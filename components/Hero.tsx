@@ -17,7 +17,7 @@ export const Hero: React.FC<HeroProps> = ({ id }) => {
   }, []);
 
   return (
-    <section id={id} className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden bg-zinc-100">
+    <section id={id} className="relative min-h-screen flex items-start md:items-center justify-center overflow-hidden bg-zinc-100 pt-32 md:pt-0">
       {/* Background with darker overlay for better contrast */}
       <div className="absolute inset-0 z-0">
         <img
@@ -35,10 +35,10 @@ export const Hero: React.FC<HeroProps> = ({ id }) => {
         </div>
       </div >
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full pt-20">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full">
         <div className="max-w-4xl animate-fade-in-up">
 
-          <h1 className="text-5xl md:text-7xl font-display font-bold text-zinc-900 leading-[1.1] mb-8">
+          <h1 className="text-4xl md:text-7xl font-display font-bold text-zinc-900 leading-[1.1] mb-8">
             <div className="flex items-center gap-3 mb-6">
               <Hexagon size={46} className="text-zinc-900 fill-zinc-900" />
               SherpARQ: <br />

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, Phone, MapPin, MessageSquare } from 'lucide-react';
+import { Mail, Phone, MapPin, MessageSquare, MessageCircle } from 'lucide-react';
 import { SelectedContext } from './ChatWidget';
 
 interface ContactProps {
@@ -88,6 +88,18 @@ export const Contact: React.FC<ContactProps> = ({ id, onContextSelect }) => {
                 <div>
                   <h4 className="text-lg font-bold mb-1">Teléfono</h4>
                   <a href="tel:+56990899725" className="text-zinc-400 hover:text-white transition-colors text-xl">
+                    +569 9089 9725
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-6">
+                <div className="p-4 bg-zinc-800 text-zinc-300">
+                  <MessageCircle size={24} />
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold mb-1">WhatsApp</h4>
+                  <a href="https://wa.me/56990899725" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors text-xl">
                     +569 9089 9725
                   </a>
                 </div>
