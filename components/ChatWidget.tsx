@@ -60,7 +60,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ activeSection, selectedC
     } else if (selectedContext.type === 'value') {
       messageContent = `La **${selectedContext.title}** es fundamental para nosotros. ¿Quieres saber cómo la aplicamos en cada proyecto?`;
     } else if (selectedContext.type === 'contact_form') {
-      messageContent = `Estoy listo,¿Para empezar, podrías indicarme alguna información como tu nombre, email o el tipo de proyecto o consulta que necesitas evaluar?`;
+      messageContent = `Estoy listo, para empezar, ¿Podrías indicarme tu nombre, email, el tipo de proyecto o la consulta que necesitas evaluar?`;
     }
 
     const contextMessage: Message = {
@@ -206,7 +206,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ activeSection, selectedC
 
       // Extraer el contenido de la respuesta de OpenAI
       const aiContent = data.choices?.[0]?.message?.content ||
-        "Lo siento, hubo un problema al procesar tu consulta. Por favor intenta nuevamente.";
+        "Lo siento, hubo un problema al procesar tu consulta. Por favor intenta nuevamente o contectános a contacto@sherparq.cl";
 
       const aiResponse: Message = {
         id: (Date.now() + 1).toString(),
@@ -220,7 +220,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ activeSection, selectedC
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: "Lo siento, hubo un error de conexión. Por favor intenta contactarnos directamente al correo."
+        content: "Lo siento, hubo un error de conexión. Por favor intenta contactarnos directamente al correo contacto@sherparq.cl"
       };
       setMessages(prev => [...prev, errorMessage]);
     } finally {
