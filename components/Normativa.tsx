@@ -402,7 +402,7 @@ Dictamen ${index + 1} (Relevancia: ${score}):
                                                     Contactar por Email
                                                 </a>
                                                 <a
-                                                    href={`https://wa.me/56912345678?text=${encodeURIComponent(reportData.whatsapp_text)}`}
+                                                    href={`https://wa.me/56990899725?text=${encodeURIComponent(reportData.whatsapp_text)}`}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                     className="flex items-center gap-2 px-6 py-3 bg-green-50 text-green-700 rounded-xl hover:bg-green-100 transition-colors font-medium"
@@ -410,16 +410,13 @@ Dictamen ${index + 1} (Relevancia: ${score}):
                                                     <MessageCircle className="w-5 h-5" />
                                                     WhatsApp
                                                 </a>
-                                                <div className="flex flex-col items-center gap-2">
-                                                    <a
-                                                        href="tel:+56912345678"
-                                                        className="flex items-center gap-2 px-6 py-3 bg-blue-50 text-blue-700 rounded-xl hover:bg-blue-100 transition-colors font-medium"
-                                                    >
-                                                        <Phone className="w-5 h-5" />
-                                                        Llamar
-                                                    </a>
-                                                    <span className="text-sm text-zinc-500 font-medium">+56 9 1234 5678</span>
-                                                </div>
+                                                <a
+                                                    href="tel:+56990899725"
+                                                    className="flex items-center gap-2 px-6 py-3 bg-blue-50 text-blue-700 rounded-xl hover:bg-blue-100 transition-colors font-medium"
+                                                >
+                                                    <Phone className="w-5 h-5" />
+                                                    Llamar al +569 9089 9725
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
