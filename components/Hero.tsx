@@ -17,7 +17,7 @@ export const Hero: React.FC<HeroProps> = ({ id }) => {
   }, []);
 
   return (
-    <section id={id} className="relative min-h-screen flex items-start md:items-center justify-center overflow-hidden bg-zinc-100 pt-32 md:pt-0">
+    <section id={id} className="relative min-h-screen flex items-start md:items-center justify-center overflow-hidden bg-zinc-100 pt-32 pb-24 md:pt-0 md:pb-0">
       {/* Background with darker overlay for better contrast */}
       <div className="absolute inset-0 z-0">
         <img

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ChevronRight } from 'lucide-react';
 
 import { SelectedContext } from './ChatWidget';
+import { ScrollHint } from './ScrollHint';
 
 interface PortfolioProps {
   id: string;
@@ -139,38 +140,43 @@ export const Portfolio: React.FC<PortfolioProps> = ({ id, onContextSelect }) => 
           </div>
         </div>
 
+
+
         {/* Project Grid / Carousel */}
-        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-8 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 scrollbar-hide">
-          {filteredProjects.map((project, idx) => (
-            <div
-              key={idx}
-              className="group flex flex-col animate-fade-in cursor-pointer min-w-[280px] md:min-w-0 snap-center"
-              onClick={() => onContextSelect && onContextSelect({ type: 'project', id: project.title, title: project.title })}
-            >
-              {/* Visual placeholder for project */}
-              <div className="w-full h-2 bg-zinc-100 mb-4 relative overflow-hidden">
-                <div className="absolute top-0 left-0 h-full bg-zinc-900 w-0 group-hover:w-full transition-all duration-700 ease-out"></div>
-              </div>
-
-              <span className="text-[0.65rem] font-bold uppercase tracking-widest text-zinc-400 mb-2">
-                {categories.find(c => c.id === project.category)?.label}
-              </span>
-
-              <h3 className="text-xl font-bold text-zinc-900 mb-3 group-hover:text-zinc-600 transition-colors">
-                {project.title}
-              </h3>
-
-              <p className="text-zinc-600 text-sm leading-relaxed mb-4 flex-grow">
-                {project.description}
-              </p>
-
-              {project.metrics && (
-                <div className="mt-auto pt-4 border-t border-zinc-100">
-                  <span className="text-xs font-semibold text-zinc-800">{project.metrics}</span>
+        <div className="relative w-full">
+          <ScrollHint />
+          <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-8 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 no-scrollbar">
+            {filteredProjects.map((project, idx) => (
+              <div
+                key={idx}
+                className="group flex flex-col animate-fade-in cursor-pointer min-w-[280px] md:min-w-0 snap-center"
+                onClick={() => onContextSelect && onContextSelect({ type: 'project', id: project.title, title: project.title })}
+              >
+                {/* Visual placeholder for project */}
+                <div className="w-full h-2 bg-zinc-100 mb-4 relative overflow-hidden">
+                  <div className="absolute top-0 left-0 h-full bg-zinc-900 w-0 group-hover:w-full transition-all duration-700 ease-out"></div>
                 </div>
-              )}
-            </div>
-          ))}
+
+                <span className="text-[0.65rem] font-bold uppercase tracking-widest text-zinc-400 mb-2">
+                  {categories.find(c => c.id === project.category)?.label}
+                </span>
+
+                <h3 className="text-xl font-bold text-zinc-900 mb-3 group-hover:text-zinc-600 transition-colors">
+                  {project.title}
+                </h3>
+
+                <p className="text-zinc-600 text-sm leading-relaxed mb-4 flex-grow">
+                  {project.description}
+                </p>
+
+                {project.metrics && (
+                  <div className="mt-auto pt-4 border-t border-zinc-100">
+                    <span className="text-xs font-semibold text-zinc-800">{project.metrics}</span>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

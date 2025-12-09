@@ -2,6 +2,7 @@ import React from 'react';
 import { ShieldCheck, FileText, HardHat, AlertTriangle } from 'lucide-react';
 
 import { SelectedContext } from './ChatWidget';
+import { ScrollHint } from './ScrollHint';
 
 interface ComplianceProps {
     onContextSelect?: (context: SelectedContext | null) => void;
@@ -50,25 +51,30 @@ export const Compliance: React.FC<ComplianceProps> = ({ onContextSelect }) => {
                     </div>
                 </div>
 
-                <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-8 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 scrollbar-hide">
-                    {regulations.map((item, index) => (
-                        <div
-                            key={index}
-                            className="bg-zinc-800/50 border border-zinc-700 p-8 hover:bg-zinc-800 transition-all duration-300 group cursor-pointer min-w-[300px] md:min-w-0 snap-center"
-                            onClick={() => onContextSelect && onContextSelect({ type: 'regulation', id: item.code, title: item.code })}
-                        >
-                            <div className="text-zinc-400 mb-6 group-hover:text-white transition-colors">
-                                {item.icon}
+
+
+                <div className="relative w-full">
+                    <ScrollHint />
+                    <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-8 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 no-scrollbar">
+                        {regulations.map((item, index) => (
+                            <div
+                                key={index}
+                                className="bg-zinc-800/50 border border-zinc-700 p-8 hover:bg-zinc-800 transition-all duration-300 group cursor-pointer min-w-[300px] md:min-w-0 snap-center"
+                                onClick={() => onContextSelect && onContextSelect({ type: 'regulation', id: item.code, title: item.code })}
+                            >
+                                <div className="text-zinc-400 mb-6 group-hover:text-white transition-colors">
+                                    {item.icon}
+                                </div>
+                                <div className="inline-block px-3 py-1 bg-zinc-800 text-xs font-bold tracking-widest uppercase text-zinc-300 mb-4 border border-zinc-600">
+                                    {item.code}
+                                </div>
+                                <h3 className="text-xl font-bold mb-3 text-white">{item.title}</h3>
+                                <p className="text-zinc-400 text-sm leading-relaxed">
+                                    {item.description}
+                                </p>
                             </div>
-                            <div className="inline-block px-3 py-1 bg-zinc-800 text-xs font-bold tracking-widest uppercase text-zinc-300 mb-4 border border-zinc-600">
-                                {item.code}
-                            </div>
-                            <h3 className="text-xl font-bold mb-3 text-white">{item.title}</h3>
-                            <p className="text-zinc-400 text-sm leading-relaxed">
-                                {item.description}
-                            </p>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>

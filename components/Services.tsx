@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 
 import { SelectedContext } from './ChatWidget';
+import { ScrollHint } from './ScrollHint';
 
 interface ServicesProps {
   id: string;
@@ -92,52 +93,57 @@ export const Services: React.FC<ServicesProps> = ({ id, onContextSelect }) => {
           </p>
         </div>
 
+
+
         {/* Responsive Layout: Carousel on Mobile, Grid on Desktop */}
-        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-8 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 scrollbar-hide">
-          {nodes.map((node) => (
-            <div
-              key={node.id}
-              className={`group relative overflow-hidden p-8 border transition-all duration-500 hover:shadow-2xl flex flex-col justify-between h-[400px] cursor-pointer min-w-[300px] md:min-w-0 snap-center
-                ${node.highlight ? 'bg-zinc-900 border-zinc-900 text-white' : 'bg-zinc-50 border-zinc-200 text-zinc-900 hover:border-zinc-400'}
-              `}
-              onClick={() => onContextSelect && onContextSelect({ type: 'service', id: node.title, title: node.title })}
-            >
-              {/* Content Layer */}
-              <div className="relative z-10 flex flex-col h-full group-hover:opacity-0 transition-opacity duration-300">
-                <div className="flex justify-between items-start mb-6">
-                  <div className={`p-3 rounded-lg ${node.highlight ? 'bg-zinc-800 text-zinc-300' : 'bg-white text-zinc-900 shadow-sm'}`}>
-                    {node.icon}
+        <div className="relative w-full">
+          <ScrollHint />
+          <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-8 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 no-scrollbar">
+            {nodes.map((node) => (
+              <div
+                key={node.id}
+                className={`group relative overflow-hidden p-8 border transition-all duration-500 hover:shadow-2xl flex flex-col justify-between h-[400px] cursor-pointer min-w-[300px] md:min-w-0 snap-center
+                  ${node.highlight ? 'bg-zinc-900 border-zinc-900 text-white' : 'bg-zinc-50 border-zinc-200 text-zinc-900 hover:border-zinc-400'}
+                `}
+                onClick={() => onContextSelect && onContextSelect({ type: 'service', id: node.title, title: node.title })}
+              >
+                {/* Content Layer */}
+                <div className="relative z-10 flex flex-col h-full group-hover:opacity-0 transition-opacity duration-300">
+                  <div className="flex justify-between items-start mb-6">
+                    <div className={`p-3 rounded-lg ${node.highlight ? 'bg-zinc-800 text-zinc-300' : 'bg-white text-zinc-900 shadow-sm'}`}>
+                      {node.icon}
+                    </div>
+                    <span className={`text-5xl font-bold opacity-10 ${node.highlight ? 'text-white' : 'text-zinc-900'}`}>
+                      0{node.id}
+                    </span>
                   </div>
-                  <span className={`text-5xl font-bold opacity-10 ${node.highlight ? 'text-white' : 'text-zinc-900'}`}>
-                    0{node.id}
-                  </span>
+
+                  <div className="mt-auto">
+                    <span className={`text-xs font-bold uppercase tracking-widest mb-2 block ${node.highlight ? 'text-zinc-400' : 'text-zinc-500'}`}>
+                      {node.subtitle}
+                    </span>
+                    <h3 className="text-2xl font-bold mb-4 leading-tight">{node.title}</h3>
+                    <p className={`text-sm leading-relaxed mb-6 line-clamp-3 ${node.highlight ? 'text-zinc-300' : 'text-zinc-600'}`}>
+                      {node.desc}
+                    </p>
+                  </div>
                 </div>
 
-                <div className="mt-auto">
-                  <span className={`text-xs font-bold uppercase tracking-widest mb-2 block ${node.highlight ? 'text-zinc-400' : 'text-zinc-500'}`}>
-                    {node.subtitle}
-                  </span>
-                  <h3 className="text-2xl font-bold mb-4 leading-tight">{node.title}</h3>
-                  <p className={`text-sm leading-relaxed mb-6 line-clamp-3 ${node.highlight ? 'text-zinc-300' : 'text-zinc-600'}`}>
-                    {node.desc}
+                {/* Reveal Layer (Value Add) */}
+                <div className={`absolute inset-0 z-20 p-8 flex flex-col justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out
+                  ${node.highlight ? 'bg-zinc-800' : 'bg-white'}
+                `}>
+                  <div className="flex items-center gap-2 mb-4">
+                    <Plus size={16} className="text-yellow-600" />
+                    <span className="text-xs font-bold uppercase tracking-widest text-yellow-600">Impacto Estratégico</span>
+                  </div>
+                  <p className={`text-lg font-medium leading-relaxed ${node.highlight ? 'text-white' : 'text-zinc-900'}`}>
+                    {node.value}
                   </p>
                 </div>
               </div>
-
-              {/* Reveal Layer (Value Add) */}
-              <div className={`absolute inset-0 z-20 p-8 flex flex-col justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out
-                ${node.highlight ? 'bg-zinc-800' : 'bg-white'}
-              `}>
-                <div className="flex items-center gap-2 mb-4">
-                  <Plus size={16} className="text-yellow-600" />
-                  <span className="text-xs font-bold uppercase tracking-widest text-yellow-600">Impacto Estratégico</span>
-                </div>
-                <p className={`text-lg font-medium leading-relaxed ${node.highlight ? 'text-white' : 'text-zinc-900'}`}>
-                  {node.value}
-                </p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
       </div>
