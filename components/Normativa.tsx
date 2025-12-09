@@ -392,7 +392,7 @@ Dictamen ${index + 1} (Relevancia: ${score}):
                                         </div>
 
                                         <div className="border-t border-zinc-100 pt-8">
-                                            <h4 className="text-lg font-semibold text-zinc-900 mb-4 text-center">¿Necesitas asesoría experta sobre este tema?</h4>
+                                            <h4 className="text-lg font-semibold text-zinc-900 mb-4 text-center">Contacta ahora asesoría experta sobre este tema</h4>
                                             <div className="flex flex-wrap justify-center gap-4">
                                                 <a
                                                     href={`mailto:contacto@sherparq.cl?subject=${encodeURIComponent(reportData.email_subject)}&body=${encodeURIComponent(reportData.email_body)}`}
