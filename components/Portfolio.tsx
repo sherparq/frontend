@@ -112,7 +112,7 @@ export const Portfolio: React.FC<PortfolioProps> = ({ id, onContextSelect }) => 
   const filteredProjects = filter === 'ALL' ? projects : projects.filter(p => p.category === filter);
 
   return (
-    <section id={id} className="py-24 bg-white">
+    <section id={id} className="py-24 bg-zinc-50">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
           <div>
@@ -129,8 +129,8 @@ export const Portfolio: React.FC<PortfolioProps> = ({ id, onContextSelect }) => 
                 key={cat.id}
                 onClick={() => setFilter(cat.id)}
                 className={`text-xs uppercase tracking-wider px-4 py-2 border transition-all duration-300 ${filter === cat.id
-                    ? 'bg-zinc-900 text-white border-zinc-900'
-                    : 'bg-transparent text-zinc-500 border-zinc-200 hover:border-zinc-400 hover:text-zinc-900'
+                  ? 'bg-zinc-900 text-white border-zinc-900'
+                  : 'bg-transparent text-zinc-500 border-zinc-200 hover:border-zinc-400 hover:text-zinc-900'
                   }`}
               >
                 {cat.label}
@@ -139,12 +139,12 @@ export const Portfolio: React.FC<PortfolioProps> = ({ id, onContextSelect }) => 
           </div>
         </div>
 
-        {/* Project Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+        {/* Project Grid / Carousel */}
+        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-8 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 scrollbar-hide">
           {filteredProjects.map((project, idx) => (
             <div
               key={idx}
-              className="group flex flex-col animate-fade-in cursor-pointer"
+              className="group flex flex-col animate-fade-in cursor-pointer min-w-[280px] md:min-w-0 snap-center"
               onClick={() => onContextSelect && onContextSelect({ type: 'project', id: project.title, title: project.title })}
             >
               {/* Visual placeholder for project */}

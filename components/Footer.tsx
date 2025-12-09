@@ -1,15 +1,15 @@
 import React from 'react';
-import { Linkedin, Instagram, Twitter, Send, MessageCircle } from 'lucide-react';
+import { Linkedin, Instagram, Twitter, Send, MessageCircle, Mail } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const year = new Date().getFullYear();
 
   // Social media strictly limited as requested
   const socials = [
-    { name: 'LinkedIn', icon: <Linkedin size={18} strokeWidth={1.5} />, href: 'https://www.linkedin.com' },
-    { name: 'Instagram', icon: <Instagram size={18} strokeWidth={1.5} />, href: 'https://www.instagram.com' },
-    { name: 'X', icon: <Twitter size={18} strokeWidth={1.5} />, href: 'https://twitter.com' },
+    { name: 'Email', icon: <Mail size={18} strokeWidth={1.5} />, href: 'mailto:contacto@sherparq.cl' },
     { name: 'WhatsApp', icon: <MessageCircle size={18} strokeWidth={1.5} />, href: 'https://wa.me/56990899725' },
+    { name: 'LinkedIn', icon: <Linkedin size={18} strokeWidth={1.5} />, href: 'https://www.linkedin.com' },
+    { name: 'X', icon: <Twitter size={18} strokeWidth={1.5} />, href: 'https://twitter.com' },
   ];
 
   return (
@@ -27,7 +27,7 @@ export const Footer: React.FC = () => {
             </p>
           </div>
 
-          <div>
+          <div className="hidden md:block">
             <h4 className="text-white font-bold mb-6">Navegación</h4>
             <ul className="space-y-4">
               <li><a href="#about" className="hover:text-white transition-colors">Nosotros</a></li>

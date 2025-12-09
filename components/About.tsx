@@ -35,16 +35,7 @@ export const About: React.FC<AboutProps> = ({ id, onContextSelect }) => {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-6 mt-10">
-              <div className="flex flex-col gap-2">
-                <span className="text-4xl font-bold text-zinc-300">15+</span>
-                <span className="text-sm font-bold uppercase tracking-wider text-zinc-900">Años de Experiencia</span>
-              </div>
-              <div className="flex flex-col gap-2">
-                <span className="text-4xl font-bold text-zinc-300">42k+</span>
-                <span className="text-sm font-bold uppercase tracking-wider text-zinc-900">m² Gestionados</span>
-              </div>
-            </div>
+
           </div>
 
           {/* Right Column: Features & Founder */}

@@ -22,21 +22,41 @@ export const Partners: React.FC<PartnersProps> = ({ onContextSelect }) => {
                     Confían en Nuestra Experiencia
                 </p>
 
-                <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-                    {partners.map((partner, index) => (
-                        <div
-                            key={index}
-                            className="w-32 md:w-40 flex flex-col items-center justify-center gap-4 group cursor-pointer"
-                            onClick={() => onContextSelect && onContextSelect({ type: 'partner', id: partner.name, title: partner.name })}
-                        >
-                            <img
-                                src={partner.logo}
-                                alt={partner.name}
-                                className="h-16 object-contain opacity-80 group-hover:opacity-100 transition-opacity"
-                            />
-                            <span className="text-xs font-bold text-zinc-400 group-hover:text-zinc-800 transition-colors text-center">{partner.name}</span>
-                        </div>
-                    ))}
+                <div className="relative flex overflow-hidden group">
+                    {/* First copy of the content */}
+                    <div className="flex animate-marquee whitespace-nowrap min-w-full shrink-0 items-center justify-around gap-12 md:gap-24 opacity-60 grayscale hover:grayscale-0 transition-all duration-500 hover:[animation-play-state:paused] pr-12 md:pr-24">
+                        {partners.map((partner, index) => (
+                            <div
+                                key={index}
+                                className="w-32 md:w-40 flex-shrink-0 flex flex-col items-center justify-center gap-4 cursor-pointer"
+                                onClick={() => onContextSelect && onContextSelect({ type: 'partner', id: partner.name, title: partner.name })}
+                            >
+                                <img
+                                    src={partner.logo}
+                                    alt={partner.name}
+                                    className="h-16 object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+                                />
+                                <span className="text-xs font-bold text-zinc-400 group-hover:text-zinc-800 transition-colors text-center">{partner.name}</span>
+                            </div>
+                        ))}
+                    </div>
+                    {/* Second copy of the content for seamless loop */}
+                    <div className="flex animate-marquee whitespace-nowrap min-w-full shrink-0 items-center justify-around gap-12 md:gap-24 opacity-60 grayscale hover:grayscale-0 transition-all duration-500 hover:[animation-play-state:paused] pr-12 md:pr-24">
+                        {partners.map((partner, index) => (
+                            <div
+                                key={`clone-${index}`}
+                                className="w-32 md:w-40 flex-shrink-0 flex flex-col items-center justify-center gap-4 cursor-pointer"
+                                onClick={() => onContextSelect && onContextSelect({ type: 'partner', id: partner.name, title: partner.name })}
+                            >
+                                <img
+                                    src={partner.logo}
+                                    alt={partner.name}
+                                    className="h-16 object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+                                />
+                                <span className="text-xs font-bold text-zinc-400 group-hover:text-zinc-800 transition-colors text-center">{partner.name}</span>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>

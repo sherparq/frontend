@@ -50,11 +50,11 @@ export const Compliance: React.FC<ComplianceProps> = ({ onContextSelect }) => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-8 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 scrollbar-hide">
                     {regulations.map((item, index) => (
                         <div
                             key={index}
-                            className="bg-zinc-800/50 border border-zinc-700 p-8 hover:bg-zinc-800 transition-all duration-300 group cursor-pointer"
+                            className="bg-zinc-800/50 border border-zinc-700 p-8 hover:bg-zinc-800 transition-all duration-300 group cursor-pointer min-w-[300px] md:min-w-0 snap-center"
                             onClick={() => onContextSelect && onContextSelect({ type: 'regulation', id: item.code, title: item.code })}
                         >
                             <div className="text-zinc-400 mb-6 group-hover:text-white transition-colors">

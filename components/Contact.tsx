@@ -120,7 +120,7 @@ export const Contact: React.FC<ContactProps> = ({ id, onContextSelect }) => {
           </div>
 
           {/* Map Placeholder */}
-          <div className="relative h-full min-h-[400px] bg-zinc-800 overflow-hidden border border-zinc-700 group">
+          <div className="hidden lg:block relative h-full min-h-[400px] bg-zinc-800 overflow-hidden border border-zinc-700 group">
             <img
               src={`${import.meta.env.BASE_URL}hero/antofagasta_coast.png`}
               alt="Mapa Antofagasta"

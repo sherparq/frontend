@@ -76,7 +76,7 @@ const nodes = [
 
 export const Services: React.FC<ServicesProps> = ({ id, onContextSelect }) => {
   return (
-    <section id={id} className="py-24 bg-white relative">
+    <section id={id} className="py-24 bg-zinc-50 relative">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
 
         {/* Section Header */}
@@ -92,12 +92,12 @@ export const Services: React.FC<ServicesProps> = ({ id, onContextSelect }) => {
           </p>
         </div>
 
-        {/* Bento Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Responsive Layout: Carousel on Mobile, Grid on Desktop */}
+        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-8 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 scrollbar-hide">
           {nodes.map((node) => (
             <div
               key={node.id}
-              className={`group relative overflow-hidden p-8 border transition-all duration-500 hover:shadow-2xl flex flex-col justify-between h-[400px] cursor-pointer
+              className={`group relative overflow-hidden p-8 border transition-all duration-500 hover:shadow-2xl flex flex-col justify-between h-[400px] cursor-pointer min-w-[300px] md:min-w-0 snap-center
                 ${node.highlight ? 'bg-zinc-900 border-zinc-900 text-white' : 'bg-zinc-50 border-zinc-200 text-zinc-900 hover:border-zinc-400'}
               `}
               onClick={() => onContextSelect && onContextSelect({ type: 'service', id: node.title, title: node.title })}
