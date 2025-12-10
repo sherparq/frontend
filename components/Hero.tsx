@@ -50,7 +50,7 @@ export const Hero: React.FC<HeroProps> = ({ id }) => {
 
           <p className="text-lg md:text-xl text-zinc-700 leading-relaxed mb-10 max-w-2xl border-l-2 border-zinc-900 pl-6">
             <strong>Soluciones para la Gran Minería en Chile.</strong><br />
-            Conjunto de servicios de ingeniería y arquitectura altamente especializados en el sector industrial. Expertos en gestión regulatoria, diseño de infraestructura crítica y optimización operacional para clientes como <i>Albemarle</i>, <i>Minera Escondida</i>, <i>Rockwood Lithium</i> y <i>Altonorte</i>.
+            Conjunto de servicios de ingeniería y arquitectura altamente especializados en el sector industrial. Expertos en gestión regulatoria, diseño de infraestructura crítica y optimización operacional para clientes como <i>Albemarle</i>, <i>Minera Escondida</i> y <i>Altonorte</i>.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">

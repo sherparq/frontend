@@ -26,7 +26,7 @@ export const About: React.FC<AboutProps> = ({ id, onContextSelect }) => {
               <p>
                 Nuestra experiencia se centra en brindar soluciones técnicas de alto nivel para la gran minería
                 (metálica y no metálica) y el sector público. Hemos colaborado con líderes de la industria como
-                <span className="font-semibold text-zinc-800"> Albemarle Ltda., Minera Escondida Ltda., Rockwood Lithium y Altonorte</span>,
+                <span className="font-semibold text-zinc-800"> Albemarle Ltda., Minera Escondida Ltda. y Altonorte</span>,
                 gestionando desde el diseño conceptual hasta la regularización y recepción final de obras.
               </p>
               <p>

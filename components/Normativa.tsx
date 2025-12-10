@@ -116,13 +116,14 @@ export const Normativa: React.FC = () => {
         setReportData(null);
 
         try {
-            const context = results.result.hits.map((hit, index) => {
+            const context = results.result.hits.map((hit) => {
                 const source = hit.fields || hit.metadata || {};
                 const rawScore = hit._score ?? hit.score;
                 const score = typeof rawScore === 'number' ? (rawScore * 100).toFixed(1) + '%' : 'N/A';
+                const docId = hit._id || hit.id || 'N/A';
 
                 return `
-Dictamen ${index + 1} (Relevancia: ${score}):
+Dictamen ID: ${docId} (Relevancia: ${score}):
 - Título: ${source.titulo || 'N/A'}
 - Resumen: ${source.Resumen || 'N/A'}
 - Materia: ${source.materia || 'N/A'}
@@ -134,11 +135,13 @@ Dictamen ${index + 1} (Relevancia: ${score}):
 
             const systemPrompt = `Eres un abogado experto en normativa administrativa. Tu tarea es elaborar un informe jurídico que responda a la consulta del usuario basándote EXCLUSIVAMENTE en los dictámenes proporcionados en el contexto.
             
-            INSTRUCCIÓN CLAVE: Debes citar explícitamente los dictámenes (por su número, ID o título) dentro del texto del informe cada vez que utilices su información para fundamentar tus conclusiones.
+            INSTRUCCIÓN CLAVE: Debes citar explícitamente los dictámenes (por su ID o título) dentro del texto del informe cada vez que utilices su información para fundamentar tus conclusiones.
+            
+            IMPORTANTE SOBRE RECOMENDACIONES: Si la materia es muy específica o requiere un análisis más profundo, NO recomiendes consultar con un experto o especialista genérico. En su lugar, señala que es recomendable contactar con SherpARQ para una reunión y análisis más profundo, ya que SherpARQ es la empresa experta en esta materia.
             
             IMPORTANTE: Tu respuesta DEBE ser un objeto JSON válido (sin bloques de código markdown) con la siguiente estructura exacta:
             {
-                "informe": "Texto completo del informe jurídico en formato markdown, incluyendo las citas a los dictámenes en el cuerpo del texto.",
+                "informe": "Texto completo del informe jurídico en formato markdown, incluyendo las citas a los dictámenes (por ID) en el cuerpo del texto.",
                 "email_subject": "Asunto sugerido para un correo de contacto profesional",
                 "email_body": "Cuerpo del correo para solicitar servicios a SherpARQ, resumiendo brevemente el hallazgo y la necesidad de asesoría",
                 "whatsapp_text": "Mensaje breve y directo para iniciar contacto por WhatsApp con SherpARQ sobre este tema"
