@@ -206,7 +206,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ activeSection, selectedC
 
       // Extraer el contenido de la respuesta de OpenAI
       const aiContent = data.choices?.[0]?.message?.content ||
-        "Lo siento, hubo un problema al procesar tu consulta. Por favor intenta nuevamente o contectános a contacto@sherparq.cl";
+        "Lo siento, hubo un problema al procesar tu consulta. Por favor intenta nuevamente o contactarnos a sepulvedarq@gmail.com";
 
       const aiResponse: Message = {
         id: (Date.now() + 1).toString(),
@@ -220,7 +220,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ activeSection, selectedC
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: "Lo siento, hubo un error de conexión. Por favor intenta contactarnos directamente al correo contacto@sherparq.cl"
+        content: "Lo siento, hubo un error de conexión. Por favor intenta contactarnos directamente al correo sepulvedarq@gmail.com"
       };
       setMessages(prev => [...prev, errorMessage]);
     } finally {

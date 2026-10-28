@@ -111,8 +111,8 @@ export const Contact: React.FC<ContactProps> = ({ id, onContextSelect }) => {
                 </div>
                 <div>
                   <h4 className="text-lg font-bold mb-1">Correo Electrónico</h4>
-                  <a href="mailto:contacto@sherparq.cl" className="text-zinc-400 hover:text-white transition-colors text-xl break-all">
-                    contacto@sherparq.cl
+                  <a href="mailto:sepulvedarq@gmail.com" className="text-zinc-400 hover:text-white transition-colors text-xl break-all">
+                    sepulvedarq@gmail.com
                   </a>
                 </div>
               </div>

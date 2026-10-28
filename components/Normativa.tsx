@@ -398,7 +398,7 @@ Dictamen ID: ${docId} (Relevancia: ${score}):
                                             <h4 className="text-lg font-semibold text-zinc-900 mb-4 text-center">Contacta ahora asesoría experta sobre este tema</h4>
                                             <div className="flex flex-wrap justify-center gap-4">
                                                 <a
-                                                    href={`mailto:contacto@sherparq.cl?subject=${encodeURIComponent(reportData.email_subject)}&body=${encodeURIComponent(reportData.email_body)}`}
+                                                    href={`mailto:sepulvedarq@gmail.com?subject=${encodeURIComponent(reportData.email_subject)}&body=${encodeURIComponent(reportData.email_body)}`}
                                                     className="flex items-center gap-2 px-6 py-3 bg-zinc-100 text-zinc-700 rounded-xl hover:bg-zinc-200 transition-colors font-medium"
                                                 >
                                                     <Mail className="w-5 h-5" />

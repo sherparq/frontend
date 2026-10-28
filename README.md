@@ -329,7 +329,7 @@ frontend/
 
 **SherpARQ**  
 Antofagasta, Chile  
-contacto@sherparq.cl
+sepulvedarq@gmail.com
 
 ---
 

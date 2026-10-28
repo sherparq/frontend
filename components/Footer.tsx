@@ -6,7 +6,7 @@ export const Footer: React.FC = () => {
 
   // Social media strictly limited as requested
   const socials = [
-    { name: 'Email', icon: <Mail size={18} strokeWidth={1.5} />, href: 'mailto:contacto@sherparq.cl' },
+    { name: 'Email', icon: <Mail size={18} strokeWidth={1.5} />, href: 'mailto:sepulvedarq@gmail.com' },
     { name: 'WhatsApp', icon: <MessageCircle size={18} strokeWidth={1.5} />, href: 'https://wa.me/56990899725' },
     { name: 'LinkedIn', icon: <Linkedin size={18} strokeWidth={1.5} />, href: 'https://www.linkedin.com' },
     { name: 'X', icon: <Twitter size={18} strokeWidth={1.5} />, href: 'https://twitter.com' },
